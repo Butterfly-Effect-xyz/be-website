@@ -14,53 +14,61 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Mona+Sans:ital,wght@0,200..900;1,200..900&family=JetBrains+Mono:wght@400;500&display=swap" />
       </head>
-      <body className="bg-ivory text-forest-deep antialiased overflow-x-hidden">
-        <nav className="sticky top-0 z-50 bg-ivory/90 backdrop-blur-sm border-b border-forest-deep/8">
-          <div className="max-w-[1480px] mx-auto px-8 sm:px-14 flex items-center justify-between h-[80px]">
-            <a href="/" className="font-sans font-extrabold text-[13px] tracking-[0.22em] uppercase text-forest-deep hover:opacity-70 transition-opacity">
-              Butterfly Effect
-            </a>
-            <div className="hidden md:flex items-center gap-10">
-              {[['Work','/work'],['Mission','/mission'],['Catalyst','/catalyst'],['Insights','/insights'],['Contact','/contact']].map(([label,href]) => (
-                <a key={href} href={href} className="font-sans font-medium text-[12px] tracking-[0.24em] uppercase text-forest-deep/60 hover:text-forest-deep transition-colors">
-                  {label}
-                </a>
-              ))}
+      <body>
+        <nav className="nav on-dark" id="site-nav">
+          <div className="nav-inner">
+            <a href="/" className="nav-logo">Butterfly Effect</a>
+            <div className="nav-links">
+              <a href="/work" className="nav-link">Work</a>
+              <a href="/mission" className="nav-link">Mission</a>
+              <a href="/catalyst" className="nav-link">Catalyst</a>
+              <a href="/insights" className="nav-link">Insights</a>
             </div>
-            <a href="/contact" className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-rust text-white font-sans font-semibold text-[11px] tracking-[0.22em] uppercase hover:bg-rust-deep transition-colors">
+            <a href="/contact" className="nav-cta">
               Let&apos;s talk
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" style={{width:16,height:16}}><path d="M5 12h14M13 5l7 7-7 7"/></svg>
             </a>
           </div>
         </nav>
         {children}
-        <footer className="bg-forest-deep text-ivory pt-20 pb-10">
-          <div className="max-w-[1480px] mx-auto px-8 sm:px-14">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-16 pb-16 border-b border-ivory/10">
+        <footer className="site-footer">
+          <div className="footer-inner">
+            <div className="footer-grid">
               <div>
-                <p className="font-sans font-extrabold text-[13px] tracking-[0.22em] uppercase mb-4">Butterfly Effect</p>
-                <p className="text-ivory/50 text-sm leading-relaxed max-w-xs">We build the trust that turns audiences into communities.</p>
+                <p className="footer-brand">Butterfly Effect</p>
+                <p className="footer-tagline">We build the trust that turns audiences into communities.</p>
               </div>
               <div>
-                <p className="font-mono text-[10px] tracking-[0.32em] uppercase text-ivory/40 mb-6">Navigation</p>
-                <ul className="space-y-3">
+                <p className="footer-col-label">Navigate</p>
+                <ul className="footer-links">
                   {['Work','Mission','Insights','Catalyst','Contact'].map(item => (
-                    <li key={item}><a href={`/${item.toLowerCase()}`} className="text-ivory/60 text-sm hover:text-ivory transition-colors">{item}</a></li>
+                    <li key={item}><a href={`/${item.toLowerCase()}`}>{item}</a></li>
                   ))}
                 </ul>
               </div>
               <div>
-                <p className="font-mono text-[10px] tracking-[0.32em] uppercase text-ivory/40 mb-6">Get in touch</p>
-                <a href="/contact" className="inline-flex items-center gap-3 px-6 py-3 rounded-full border border-ivory/20 text-ivory/70 font-sans font-semibold text-[12px] tracking-[0.22em] uppercase hover:bg-ivory/10 transition-colors">
+                <p className="footer-col-label">Get in touch</p>
+                <a href="/contact" className="btn btn-outline-light">
                   Drop us a DM
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" style={{width:16,height:16}}><path d="M5 12h14M13 5l7 7-7 7"/></svg>
                 </a>
               </div>
             </div>
-            <div className="pt-8 flex flex-col md:flex-row justify-between gap-4">
-              <p className="font-mono text-[10px] tracking-[0.22em] uppercase text-ivory/30">© {new Date().getFullYear()} Butterfly Effect. All rights reserved.</p>
-              <p className="font-mono text-[10px] tracking-[0.22em] uppercase text-ivory/30">Seize the void.</p>
+            <div className="footer-base">
+              <p className="footer-copy">© {new Date().getFullYear()} Butterfly Effect. All rights reserved.</p>
+              <p className="footer-copy">Seize the void.</p>
             </div>
           </div>
         </footer>
+        <script dangerouslySetInnerHTML={{__html: `
+          const nav = document.getElementById('site-nav');
+          let dark = document.body.dataset.heroDark === '1';
+          if(dark) nav.classList.add('on-dark');
+          window.addEventListener('scroll', () => {
+            if(window.scrollY > 40) { nav.classList.add('scrolled'); nav.classList.remove('on-dark'); }
+            else { nav.classList.remove('scrolled'); if(dark) nav.classList.add('on-dark'); }
+          });
+        `}} />
       </body>
     </html>
   )
