@@ -197,7 +197,7 @@ export default async function HomePage() {
                   <div className="crew-portrait" style={{position:'relative',overflow:'hidden'}}>
                     {m.photo
                       ? <img
-                          src={urlFor(m.photo).width(440).height(440).url()}
+                          src={urlFor(m.photo).width(440).height(580).url()}
                           alt={m.name}
                           style={{width:'100%',height:'100%',objectFit:'cover',position:'absolute',inset:0,transition:'opacity 0.3s'}}
                           className="crew-photo-static"
