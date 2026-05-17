@@ -95,21 +95,21 @@ export default async function HomePage() {
             </div>
           </div>
           <div className="featured-grid">
-            <Link href="/work/dutch-barn-vodka-spirit-of-comedy" className="featured-card is-cream" style={{backgroundImage:"url('/dutch-barn-gervais-bottle.png')"}}>
+            <Link href="/work/dutch-barn-vodka-spirit-of-comedy" className="featured-card is-cream">
               <span className="featured-hero-name">DUTCH BARN VODKA</span>
               <span className="featured-hero-cta">View case study <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg></span>
             </Link>
-            <Link href="/work/nike-cpqd" className="featured-card is-forest" style={{backgroundImage:"url('/nike-case.jpeg')"}}>
+            <Link href="/work/nike-cpqd" className="featured-card is-forest">
               <span className="featured-hero-name">NIKE</span>
               <span className="featured-hero-cta">View case study <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg></span>
             </Link>
           </div>
           <div className="featured-grid">
-            <Link href="/work/netflix-top-boy" className="featured-card is-cream" style={{backgroundImage:"url('/netflix-case.png')"}}>
+            <Link href="/work/netflix-top-boy" className="featured-card is-cream">
               <span className="featured-hero-name">NETFLIX</span>
               <span className="featured-hero-cta">View case study <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg></span>
             </Link>
-            <Link href="/work/bumble" className="featured-card is-forest" style={{backgroundImage:"url('/bumble-cover.png')"}}>
+            <Link href="/work/bumble" className="featured-card is-forest">
               <span className="featured-hero-name">BUMBLE</span>
               <span className="featured-hero-cta">View case study <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg></span>
             </Link>
