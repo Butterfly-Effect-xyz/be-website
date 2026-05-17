@@ -228,3 +228,4 @@ cat >> ~/Desktop/be-nextjs/app/globals.css << 'EOF'
 ::-webkit-scrollbar{width:6px;}
 ::-webkit-scrollbar-track{background:var(--ivory);}
 ::-webkit-scrollbar-thumb{background:var(--moss);border-radius:3px;}
+}
