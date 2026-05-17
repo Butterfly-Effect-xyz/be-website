@@ -185,3 +185,5 @@ button { font: inherit; cursor: pointer; border: 0; background: transparent; col
 ::-webkit-scrollbar { width: 6px; }
 ::-webkit-scrollbar-track { background: var(--ivory); }
 ::-webkit-scrollbar-thumb { background: var(--moss); border-radius: 3px; }
+.crew-card:hover .crew-photo-static { opacity: 0; }
+.crew-card:hover .crew-photo-gif { opacity: 1 !important; }

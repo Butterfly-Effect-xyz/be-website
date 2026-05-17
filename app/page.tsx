@@ -193,12 +193,26 @@ export default async function HomePage() {
           <div className="crew-track-wrap">
             <div className="crew-track" id="crew-track">
               {crew.map((m: any) => (
-                <div key={m._id} className="crew-card">
-                  <div className="crew-portrait">
+                <div key={m._id} className="crew-card" style={{position:'relative'}}>
+                  <div className="crew-portrait" style={{position:'relative',overflow:'hidden'}}>
                     {m.photo
-                      ? <img src={urlFor(m.photo).width(220).height(220).url()} alt={m.name} style={{width:'100%',height:'100%',objectFit:'cover'}} />
+                      ? <img
+                          src={urlFor(m.photo).width(220).height(220).url()}
+                          alt={m.name}
+                          style={{width:'100%',height:'100%',objectFit:'cover',position:'absolute',inset:0,transition:'opacity 0.3s'}}
+                          className="crew-photo-static"
+                        />
                       : <div className="crew-portrait-placeholder"><span>{m.name.split(' ').map((n:string)=>n[0]).join('')}</span></div>
                     }
+                    {m.hoverGif && (
+                      <img
+                        src={urlFor(m.hoverGif).url()}
+                        alt=""
+                        aria-hidden="true"
+                        style={{width:'100%',height:'100%',objectFit:'cover',position:'absolute',inset:0,opacity:0,transition:'opacity 0.3s'}}
+                        className="crew-photo-gif"
+                      />
+                    )}
                   </div>
                   <h3 className="crew-name">{m.name}</h3>
                   <p className="crew-role">{m.role}</p>
