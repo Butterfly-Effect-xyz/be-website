@@ -136,7 +136,7 @@ button { font: inherit; cursor: pointer; border: 0; background: transparent; col
 .crew-track-wrap { overflow: hidden; }
 .crew-track { display: flex; gap: 24px; transition: transform 0.5s var(--ease-out); }
 .crew-card { flex: 0 0 220px; }
-.crew-portrait { width: 100%; aspect-ratio: 1; background: var(--bg-2); border-radius: 2px; margin-bottom: 16px; overflow: hidden; position: relative; }
+.crew-portrait { width: 100%; aspect-ratio: 1; background: var(--bg-2); border-radius: 2px; margin-bottom: 16px; overflow: hidden; position: relative; display: block; }
 .crew-portrait-placeholder { width: 100%; height: 100%; background: linear-gradient(135deg,#506054,#1d3023); display: flex; align-items: center; justify-content: center; }
 .crew-portrait-placeholder span { font-family: var(--display); font-weight: 800; font-size: 32px; color: rgba(244,239,230,0.3); }
 .crew-name { font-family: var(--display); font-weight: 700; font-size: 17px; letter-spacing: -0.01em; margin: 0 0 4px; }
@@ -185,5 +185,9 @@ button { font: inherit; cursor: pointer; border: 0; background: transparent; col
 ::-webkit-scrollbar { width: 6px; }
 ::-webkit-scrollbar-track { background: var(--ivory); }
 ::-webkit-scrollbar-thumb { background: var(--moss); border-radius: 3px; }
+
+
+.crew-photo-static { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: opacity 0.4s ease; z-index: 1; }
+.crew-photo-gif { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity 0.4s ease; z-index: 2; }
 .crew-card:hover .crew-photo-static { opacity: 0; }
-.crew-card:hover .crew-photo-gif { opacity: 1 !important; }
+.crew-card:hover .crew-photo-gif { opacity: 1; }
