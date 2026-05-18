@@ -40,7 +40,7 @@ export default async function WorkPage() {
               <div className="wcard-img">
                 {w.heroImage
                   ? <img src={urlFor(w.heroImage).width(800).height(500).url()} alt={w.heroHeadline} style={{width:'100%',height:'100%',objectFit:'cover'}} />
-                  : <div className="wcard-placeholder"><span>{w.client}</span></div>
+                  : <div className="wcard-placeholder" style={{background:"linear-gradient(135deg,#1d3023,#506054)"}}><span style={{color:"rgba(244,239,230,0.25)",fontFamily:"var(--display)",fontWeight:800,fontSize:"clamp(14px,2vw,24px)",textAlign:"center",padding:"24px"}}>{w.client}</span></div>
                 }
                 <div className="wcard-hover">
                   <span className="wcard-hover-cta">View case study <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" style={{width:14,height:14}}><path d="M5 12h14M13 5l7 7-7 7"/></svg></span>
