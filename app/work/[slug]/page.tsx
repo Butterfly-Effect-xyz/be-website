@@ -1,9 +1,10 @@
+export const dynamic = 'force-dynamic'
+export const revalidate = 60
+
 import { client, urlFor } from '@/lib/sanity'
 import { caseStudyBySlugQuery, allCaseStudiesQuery } from '@/lib/queries'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
-
-export const revalidate = 60
 
 export async function generateMetadata({ params }: { params: { slug: string } }) {
   try {
