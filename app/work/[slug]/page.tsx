@@ -1,8 +1,16 @@
 export const dynamic = 'force-dynamic'
 export const revalidate = 60
 
-import { client, urlFor } from '@/lib/sanity'
+import { urlFor } from '@/lib/sanity'
+import { createClient } from '@sanity/client'
 import { caseStudyBySlugQuery, allCaseStudiesQuery } from '@/lib/queries'
+
+const client = createClient({
+  projectId: 'x4948ouk',
+  dataset: 'production',
+  apiVersion: '2024-01-01',
+  useCdn: false,
+})
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 
