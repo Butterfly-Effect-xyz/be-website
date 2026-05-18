@@ -13,17 +13,18 @@ const SERVICES = [
 
 async function getData() {
   try {
-    const [slides, testimonials, team] = await Promise.all([
+    const [slides, testimonials, team, featured] = await Promise.all([
       client.fetch(heroSlidesQuery),
       client.fetch(testimonialsQuery),
       client.fetch(teamMembersQuery),
+      client.fetch(featuredCaseStudiesQuery),
     ])
-    return { slides: slides?.length ? slides : null, testimonials: testimonials || [], team: team || [] }
-  } catch { return { slides: null, testimonials: [], team: [] } }
+    return { slides: slides?.length ? slides : null, testimonials: testimonials || [], team: team || [], featured: featured || [] }
+  } catch { return { slides: null, testimonials: [], team: [], featured: [] } }
 }
 
 export default async function HomePage() {
-  const { slides, testimonials, team } = await getData()
+  const { slides, testimonials, team, featured: sanityFeatured } = await getData()
 
   const heroSlides = slides || [
     { _id:'1', kicker:'Mission', headline:'We build the trust that turns audiences into communities.', dek:'Seize the void.', ctaLabel:'Our mission', ctaHref:'/mission' },
@@ -95,24 +96,24 @@ export default async function HomePage() {
             </div>
           </div>
           <div className="featured-grid">
-            <Link href="/work/dutch-barn-vodka-spirit-of-comedy" className="featured-card is-cream">
-              <span className="featured-hero-name">DUTCH BARN VODKA</span>
-              <span className="featured-hero-cta">View case study <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg></span>
-            </Link>
-            <Link href="/work/nike-cpqd" className="featured-card is-forest">
-              <span className="featured-hero-name">NIKE</span>
-              <span className="featured-hero-cta">View case study <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg></span>
-            </Link>
+            {sanityFeatured.slice(0,2).map((w: any, i: number) => (
+              <Link key={w._id} href={'/work/' + w.slug?.current}
+                className={'featured-card ' + (i % 2 === 0 ? 'is-cream' : 'is-forest')}
+                style={w.heroImage ? {backgroundImage:'url('+urlFor(w.heroImage).width(900).height(560).url()+')'} : {}}>
+                <span className="featured-hero-name">{(w.client||w.title||'').toUpperCase()}</span>
+                <span className="featured-hero-cta">View case study <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg></span>
+              </Link>
+            ))}
           </div>
           <div className="featured-grid">
-            <Link href="/work/netflix-top-boy" className="featured-card is-cream">
-              <span className="featured-hero-name">NETFLIX</span>
-              <span className="featured-hero-cta">View case study <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg></span>
-            </Link>
-            <Link href="/work/bumble" className="featured-card is-forest">
-              <span className="featured-hero-name">BUMBLE</span>
-              <span className="featured-hero-cta">View case study <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg></span>
-            </Link>
+            {sanityFeatured.slice(2,4).map((w: any, i: number) => (
+              <Link key={w._id} href={'/work/' + w.slug?.current}
+                className={'featured-card ' + (i % 2 === 0 ? 'is-forest' : 'is-cream')}
+                style={w.heroImage ? {backgroundImage:'url('+urlFor(w.heroImage).width(900).height(560).url()+')'} : {}}>
+                <span className="featured-hero-name">{(w.client||w.title||'').toUpperCase()}</span>
+                <span className="featured-hero-cta">View case study <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg></span>
+              </Link>
+            ))}
           </div>
           <div className="featured-foot">
             <Link href="/work" className="link-arrow">View all work <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg></Link>
