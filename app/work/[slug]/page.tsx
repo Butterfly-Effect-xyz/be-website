@@ -1,3 +1,5 @@
+export const revalidate = 60
+
 import { client, urlFor } from '@/lib/sanity'
 import { caseStudyBySlugQuery, allCaseStudiesQuery } from '@/lib/queries'
 import Link from 'next/link'
