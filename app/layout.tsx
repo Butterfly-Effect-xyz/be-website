@@ -19,10 +19,24 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <div className="nav-inner">
             <a href="/" className="nav-logo">Butterfly Effect</a>
             <div className="nav-links">
+              <div className="nav-drop">
+                <a href="/mission" className="nav-link">Mission <svg className="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M6 9l6 6 6-6"/></svg></a>
+                <div className="nav-drop-panel">
+                  <a href="/mission#story">Our Story</a>
+                  <a href="/mission#team">Team</a>
+                  <a href="/mission#careers">Careers</a>
+                </div>
+              </div>
               <a href="/work" className="nav-link">Work</a>
-              <a href="/mission" className="nav-link">Mission</a>
+              <div className="nav-drop">
+                <a href="/insights" className="nav-link">Insights <svg className="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M6 9l6 6 6-6"/></svg></a>
+                <div className="nav-drop-panel">
+                  <a href="/insights">All</a>
+                  <a href="/insights?cat=podcast">Podcasts</a>
+                  <a href="/insights?cat=article">Articles</a>
+                </div>
+              </div>
               <a href="/catalyst" className="nav-link">Catalyst</a>
-              <a href="/insights" className="nav-link">Insights</a>
             </div>
             <a href="/contact" className="nav-cta">
               Let&apos;s talk
