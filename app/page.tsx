@@ -99,7 +99,7 @@ export default async function HomePage() {
             {sanityFeatured.slice(0,2).map((w: any, i: number) => (
               <Link key={w._id} href={'/work/' + w.slug?.current}
                 className={'featured-card ' + (i % 2 === 0 ? 'is-cream' : 'is-forest')}
-                style={w.heroImage ? {backgroundImage:'url('+urlFor(w.heroImage).width(900).height(560).url()+')'} : {}}>
+                style={w.heroImageUrl ? {backgroundImage:'url('+w.heroImageUrl+')'} : {}}>
                 <span className="featured-hero-name">{(w.client||w.title||'').toUpperCase()}</span>
                 <span className="featured-hero-cta">View case study <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg></span>
               </Link>
@@ -109,7 +109,7 @@ export default async function HomePage() {
             {sanityFeatured.slice(2,4).map((w: any, i: number) => (
               <Link key={w._id} href={'/work/' + w.slug?.current}
                 className={'featured-card ' + (i % 2 === 0 ? 'is-forest' : 'is-cream')}
-                style={w.heroImage ? {backgroundImage:'url('+urlFor(w.heroImage).width(900).height(560).url()+')'} : {}}>
+                style={w.heroImageUrl ? {backgroundImage:'url('+w.heroImageUrl+')'} : {}}>
                 <span className="featured-hero-name">{(w.client||w.title||'').toUpperCase()}</span>
                 <span className="featured-hero-cta">View case study <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg></span>
               </Link>

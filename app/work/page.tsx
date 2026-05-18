@@ -38,8 +38,8 @@ export default async function WorkPage() {
           {works.map((w: any) => (
             <Link key={w._id} href={'/work/' + w.slug?.current} className="wcard">
               <div className="wcard-img">
-                {w.heroImage
-                  ? <img src={urlFor(w.heroImage).width(800).height(500).url()} alt={w.heroHeadline} style={{width:'100%',height:'100%',objectFit:'cover'}} />
+                {w.heroImageUrl
+                  ? <img src={w.heroImageUrl} alt={w.heroHeadline} style={{width:'100%',height:'100%',objectFit:'cover'}} />
                   : <div className="wcard-placeholder" style={{background:"linear-gradient(135deg,#1d3023,#506054)"}}><span style={{color:"rgba(244,239,230,0.25)",fontFamily:"var(--display)",fontWeight:800,fontSize:"clamp(14px,2vw,24px)",textAlign:"center",padding:"24px"}}>{w.client}</span></div>
                 }
                 <div className="wcard-hover">
