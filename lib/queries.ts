@@ -1,10 +1,10 @@
 export const heroSlidesQuery = `*[_type == "heroSlide"] | order(order asc) { _id, kicker, headline, dek, ctaLabel, ctaHref }`
 
-export const featuredCaseStudiesQuery = `*[_type == "caseStudy" && featured == true] | order(displayOrder asc)[0...4] { _id, title, slug, client, heroImage, services, displayOrder }`
+export const featuredCaseStudiesQuery = `*[_type == "caseStudy" && featured == true] | order(displayOrder asc)[0...4] { _id, title, slug, client, heroImage { asset-> }, services, displayOrder }`
 
-export const allCaseStudiesQuery = `*[_type == "caseStudy"] | order(displayOrder asc) { _id, title, slug, client, heroImage, heroLabel, heroHeadline, heroSubhead, summary, services, year, featured, displayOrder, results[] { stat, label } }`
+export const allCaseStudiesQuery = `*[_type == "caseStudy"] | order(displayOrder asc) { _id, title, slug, client, heroImage { asset-> }, heroLabel, heroHeadline, heroSubhead, summary, services, year, featured, displayOrder, results[] { stat, label } }`
 
-export const caseStudyBySlugQuery = `*[_type == "caseStudy" && slug.current == $slug][0] { _id, title, slug, client, heroImage, heroLabel, heroHeadline, heroSubhead, summary, services, year, results[] { stat, label }, theChallenge, approach { blueprint, build, broadcast }, testimonial { quote, attribution } }`
+export const caseStudyBySlugQuery = `*[_type == "caseStudy" && slug.current == $slug][0] { _id, title, slug, client, heroImage { asset-> }, heroLabel, heroHeadline, heroSubhead, summary, services, year, results[] { stat, label }, theChallenge, approach { blueprint, build, broadcast }, testimonial { quote, attribution } }`
 
 export const teamMembersQuery = `*[_type == "teamMember"] | order(order asc) { _id, name, role, photo, order }`
 
