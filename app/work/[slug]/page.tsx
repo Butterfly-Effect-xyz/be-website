@@ -28,7 +28,7 @@ export async function generateStaticParams() {
 export default async function CaseStudyPage({ params }: { params: { slug: string } }) {
   let work: any = null
   try { work = await client.fetch(caseStudyBySlugQuery, { slug: params.slug }); console.log('WORK:', JSON.stringify(work)); } catch(e) { console.log('ERROR:', e) }
-  if (!work) return <main style={{padding:'120px 40px',textAlign:'center'}}><h1 style={{fontFamily:'var(--display)',fontWeight:800,fontSize:48}}>Case study coming soon.</h1><a href='/work' style={{display:'inline-block',marginTop:32,color:'var(--rust)'}}>← Back to work</a></main>
+  if (!work) return <main style={{padding:'120px 40px',textAlign:'center'}}><h1 style={{fontFamily:'var(--display)',fontWeight:800,fontSize:48}}>404 — Not found</h1><a href='/work' style={{display:'inline-block',marginTop:32}}>← Back to work</a></main>
 
   const heroImageUrl = work.heroImageUrl || (work.heroImage ? urlFor(work.heroImage).width(1600).height(900).url() : null)
 

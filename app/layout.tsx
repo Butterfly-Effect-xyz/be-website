@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import './globals.css'
+import QuickNav from '@/components/QuickNav'
 
 export const metadata: Metadata = {
   title: 'Butterfly Effect — Seize the void',
@@ -74,6 +75,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             </div>
           </div>
         </footer>
+        <QuickNav />
         <script dangerouslySetInnerHTML={{__html: `
           const nav = document.getElementById('site-nav');
           let dark = document.body.dataset.heroDark === '1';
