@@ -46,7 +46,7 @@ export default function Services() {
                   overflow:"hidden",
                   background: isOpen ? "#000" : "transparent",
                   color: isOpen ? "#fff" : "#000",
-                  borderRight:"1px solid rgba(0,0,0,0.10)",
+                  borderRight:"1px solid rgba(22,30,27,0.15)",
                   display:"flex",
                   flexDirection:"column",
                   justifyContent:"space-between",
@@ -86,7 +86,7 @@ export default function Services() {
                   transition:"opacity 0.5s 0.1s ease, transform 0.5s 0.1s ease",
                 }}>
                   <h3 style={{fontFamily:"var(--display)",fontWeight:800,fontSize:"clamp(28px,3vw,44px)",letterSpacing:"-0.025em",margin:"0 0 16px",color:"#fff"}}>{s.title}</h3>
-                  <p style={{fontSize:16,lineHeight:1.55,maxWidth:"38ch",color:"rgba(255,255,255,0.78)",margin:0}}>{s.body}</p>
+                  <p style={{fontSize:16,lineHeight:1.55,maxWidth:"38ch",color:"rgba(155,167,129,0.85)",margin:0}}>{s.body}</p>
                 </div>
 
                 {/* Footer link - shown when open */}
@@ -98,7 +98,7 @@ export default function Services() {
                   fontWeight:600,
                   letterSpacing:"0.24em",
                   textTransform:"uppercase",
-                  color:"#fff",
+                  color:"#9ba781",
                   textDecoration:"none",
                   opacity: isOpen ? 1 : 0,
                   transform: isOpen ? "none" : "translateY(8px)",
