@@ -23,7 +23,7 @@ export default function AnnouncementCard() {
   const [current, setCurrent] = useState(0)
   const [dismissed, setDismissed] = useState(false)
   const [visible, setVisible] = useState(false)
-  const timerRef = useRef<NodeJS.Timeout>()
+  const timerRef = useRef<NodeJS.Timeout | null>(null)
 
   useEffect(() => {
     if (sessionStorage.getItem("be_ann_dismissed")) { setDismissed(true); return }
