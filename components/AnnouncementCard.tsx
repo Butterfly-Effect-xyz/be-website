@@ -36,11 +36,11 @@ export default function AnnouncementCard() {
     timerRef.current = setInterval(() => {
       setCurrent(c => (c + 1) % ANNOUNCEMENTS.length)
     }, 7000)
-    return () => clearInterval(timerRef.current)
+    return () => { if (timerRef.current) clearInterval(timerRef.current) }
   }, [visible, dismissed])
 
   const go = (i: number) => {
-    clearInterval(timerRef.current)
+    if (timerRef.current) clearInterval(timerRef.current)
     setCurrent((i + ANNOUNCEMENTS.length) % ANNOUNCEMENTS.length)
   }
 
