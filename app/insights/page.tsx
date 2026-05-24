@@ -57,7 +57,7 @@ export default function InsightsPage() {
       </section>
 
       {/* PODCASTS */}
-      <section style={{padding:"64px 0 96px"}}>
+      <section id="podcasts" style={{padding:"64px 0 96px"}}>
         <div style={{maxWidth:1280,margin:"0 auto",padding:"0 40px"}}>
           <div style={{display:"flex",alignItems:"baseline",justifyContent:"space-between",marginBottom:48,borderBottom:"1px solid rgba(0,0,0,0.08)",paddingBottom:24}}>
             <h2 style={{fontFamily:"var(--display)",fontWeight:800,fontSize:"clamp(28px,3vw,44px)",letterSpacing:"-0.02em",margin:0}}>Podcasts</h2>
@@ -90,7 +90,7 @@ export default function InsightsPage() {
           </div>
 
           {/* ARTICLES */}
-          <div style={{display:"flex",alignItems:"baseline",justifyContent:"space-between",marginBottom:48,borderBottom:"1px solid rgba(0,0,0,0.08)",paddingBottom:24}}>
+          <div id="articles" style={{display:"flex",alignItems:"baseline",justifyContent:"space-between",marginBottom:48,borderBottom:"1px solid rgba(0,0,0,0.08)",paddingBottom:24}}>
             <h2 style={{fontFamily:"var(--display)",fontWeight:800,fontSize:"clamp(28px,3vw,44px)",letterSpacing:"-0.02em",margin:0}}>Articles</h2>
           </div>
           <div style={{display:"grid",gridTemplateColumns:"repeat(3,minmax(0,1fr))",gap:"clamp(36px,4vw,72px) clamp(24px,3vw,48px)"}}>
