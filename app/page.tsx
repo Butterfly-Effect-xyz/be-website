@@ -3,6 +3,7 @@ export const revalidate = 60
 import { client, urlFor } from '@/lib/sanity'
 import { heroSlidesQuery, testimonialsQuery, teamMembersQuery, featuredCaseStudiesQuery } from '@/lib/queries'
 import Link from 'next/link'
+import Services from '@/components/Services'
 
 const LOGOS = ['NETFLIX',"McDONALD'S",'META','SQUARE','THE CHEESECAKE FACTORY','MOVELLA','BUMBLE','DUTCH BARN']
 
@@ -123,33 +124,9 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* SERVICES */}
-      <section className="sec-pad" id="services" style={{paddingTop:40}}>
-        <div className="container">
-          <div className="sec-head">
-            <span className="t-eyebrow">What we do</span>
-            <h2 className="t-h2">Services</h2>
-          </div>
-          <div className="services-grid" id="services-grid">
-            {SERVICES.map((svc, i) => (
-              <div key={svc.id} className={`svc${i === 0 ? ' is-open' : ''}`}>
-                <span className="svc-num">{svc.num}</span>
-                <span className="svc-spine"><span>{svc.name}</span></span>
-                <div className="svc-body">
-                  <h3>{svc.name}</h3>
-                  <p>{svc.desc}</p>
-                </div>
-                <Link href={`/work?cat=${svc.cat}`} className="svc-foot">
-                  View {svc.name.toLowerCase()} work
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
-                </Link>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      <Services />
 
-      {/* VOICES */}
+            {/* VOICES */}
       <section className="sec-pad-s" id="voices">
         <div className="container">
           <span className="t-eyebrow" style={{marginBottom:48,display:'block'}}>Client voices</span>
