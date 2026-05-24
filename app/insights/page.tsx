@@ -1,4 +1,4 @@
-export const revalidate = 60
+"use client"
 
 const PODCASTS = [
   {
@@ -75,7 +75,7 @@ export default function InsightsPage() {
                   <div style={{aspectRatio:"16/9",background:"#ffd80a",borderRadius:2,position:"relative",overflow:"hidden"}} className="ins-thumb">
                     <img src={thumb} loading="lazy" alt="" className="ins-thumb-img"
                       style={{position:"absolute",inset:0,width:"100%",height:"100%",objectFit:"cover"}}
-                      onError={(e:any) => { if(e.target.src !== thumb2) e.target.src = thumb2 }} />
+                      onError={(e:any) => { const t = e.currentTarget; if(t.src !== thumb2) t.src = thumb2 }} />
                     <span style={{position:"absolute",left:18,bottom:18,width:48,height:48,borderRadius:"50%",background:"#b94a26",color:"#fff",display:"grid",placeItems:"center",boxShadow:"0 6px 22px rgba(0,0,0,0.28)",zIndex:2}} className="ins-thumb-play">
                       <svg viewBox="0 0 24 24" fill="currentColor" style={{width:16,height:16,marginLeft:2}}><path d="M8 5v14l11-7z"/></svg>
                     </span>
