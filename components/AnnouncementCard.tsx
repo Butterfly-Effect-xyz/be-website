@@ -58,7 +58,7 @@ export default function AnnouncementCard() {
     <div
       role="region"
       aria-label="Site announcements"
-      onMouseEnter={() => clearInterval(timerRef.current)}
+      onMouseEnter={() => { if (timerRef.current) clearInterval(timerRef.current) }}
       style={{
         position: "absolute",
         top: "50%",
