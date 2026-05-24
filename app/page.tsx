@@ -56,42 +56,33 @@ export default async function HomePage() {
     <main data-hero-dark="1">
       {/* HERO */}
       <section className="hero" id="hero" style={{position:'relative',overflow:'hidden'}}>
-        {/* Aura glow */}
+        {/* Aura glow - moss + earth */}
         <div style={{
           position:'absolute',
-          top:'50%',
-          right:'8%',
+          top:'40%',
+          right:'5%',
           transform:'translateY(-50%)',
-          width:'min(600px,55vw)',
-          height:'min(600px,55vw)',
+          width:'min(700px,60vw)',
+          height:'min(700px,60vw)',
           borderRadius:'50%',
-          background:'radial-gradient(circle, rgba(155,167,129,0.12) 0%, rgba(139,110,78,0.08) 40%, transparent 70%)',
+          background:'radial-gradient(circle at 60% 40%, rgba(155,167,129,0.18) 0%, rgba(139,110,78,0.12) 35%, rgba(80,96,84,0.06) 60%, transparent 75%)',
           pointerEvents:'none',
           zIndex:1,
+          filter:'blur(40px)',
         }} />
-        {/* Butterfly logo */}
         <div style={{
           position:'absolute',
-          top:'50%',
-          right:'10%',
-          transform:'translateY(-50%)',
-          width:'min(420px,38vw)',
-          height:'min(420px,38vw)',
-          opacity:0.07,
+          bottom:'10%',
+          right:'25%',
+          width:'min(300px,25vw)',
+          height:'min(300px,25vw)',
+          borderRadius:'50%',
+          background:'radial-gradient(circle, rgba(139,110,78,0.10) 0%, transparent 70%)',
           pointerEvents:'none',
           zIndex:1,
-        }}>
-          <svg viewBox="0 0 1080 1080" fill="none" xmlns="http://www.w3.org/2000/svg" style={{width:'100%',height:'100%'}}>
-            <path d="M540 540 C540 540 380 200 150 120 C80 95 40 140 60 200 C120 380 340 460 540 540Z" stroke="white" strokeWidth="8" fill="none" opacity="0.9"/>
-            <path d="M540 540 C540 540 700 200 930 120 C1000 95 1040 140 1020 200 C960 380 740 460 540 540Z" stroke="white" strokeWidth="8" fill="none" opacity="0.9"/>
-            <path d="M540 540 C540 540 300 620 200 840 C170 910 210 950 270 930 C460 870 520 680 540 540Z" stroke="white" strokeWidth="8" fill="none" opacity="0.9"/>
-            <path d="M540 540 C540 540 780 620 880 840 C910 910 870 950 810 930 C620 870 560 680 540 540Z" stroke="white" strokeWidth="8" fill="none" opacity="0.9"/>
-            <path d="M540 540 C540 540 410 240 220 160 C160 138 125 175 140 230 C190 400 390 480 540 540Z" stroke="white" strokeWidth="5" fill="none" opacity="0.6"/>
-            <path d="M540 540 C540 540 670 240 860 160 C920 138 955 175 940 230 C890 400 690 480 540 540Z" stroke="white" strokeWidth="5" fill="none" opacity="0.6"/>
-            <path d="M540 540 C540 540 330 640 250 850 C225 918 262 952 318 935 C490 878 530 690 540 540Z" stroke="white" strokeWidth="5" fill="none" opacity="0.6"/>
-            <path d="M540 540 C540 540 750 640 830 850 C855 918 818 952 762 935 C590 878 550 690 540 540Z" stroke="white" strokeWidth="5" fill="none" opacity="0.6"/>
-          </svg>
-        </div>
+          filter:'blur(30px)',
+        }} />
+
         <div className="hero-stage" id="hero-stage" style={{position:'relative',zIndex:2}}>
           {heroSlides.map((slide: any, i: number) => (
             <article key={slide._id} className={`hero-slide${i === 0 ? ' is-active' : ''}`}>
