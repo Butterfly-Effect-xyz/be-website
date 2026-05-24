@@ -199,3 +199,10 @@ button { font: inherit; cursor: pointer; border: 0; background: transparent; col
 .nav-drop-panel a:hover { color: #000000; background: rgba(0,0,0,0.04); }
 .chev { width: 9px; height: 9px; transition: transform 0.3s; display: inline-block; vertical-align: middle; margin-left: 3px; }
 .nav-drop:hover .chev { transform: rotate(180deg); }
+.ins-card:hover .ins-title { color: #b94a26; }
+.ins-card:hover .ins-thumb-img { transform: scale(1.04); filter: brightness(1.04) saturate(1.05); }
+.ins-card:hover .ins-thumb::after { opacity: 1; }
+.ins-card:hover .ins-thumb-play { transform: scale(1.12); background: #9a3d20; }
+.ins-thumb-img { transition: transform 0.6s var(--ease-out), filter 0.4s var(--ease-out); }
+.ins-title { transition: color 0.25s; }
+.ins-thumb-play { transition: transform 0.3s var(--ease-out), background-color 0.25s; }
