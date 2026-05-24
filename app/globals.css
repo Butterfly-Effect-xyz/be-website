@@ -3,20 +3,20 @@
 @tailwind utilities;
 
 :root {
-  --forest-deep: #1d3023;
-  --forest: #506054;
-  --moss: #9ba781;
-  --rust: #b94a26;
-  --rust-deep: #9a3d20;
-  --ivory: #f4efe6;
-  --ivory-2: #ece6d9;
-  --cream: #f1ebde;
-  --bg: var(--ivory);
-  --bg-2: var(--cream);
-  --fg: #14241a;
-  --fg-soft: rgba(20,36,26,0.62);
-  --fg-mute: rgba(20,36,26,0.42);
-  --rule: rgba(20,36,26,0.10);
+  --forest-deep: #000000;
+  --forest: #0e0e0e;
+  --moss: #666666;
+  --rust: #000000;
+  --rust-deep: #1f1f1f;
+  --ivory: #ffffff;
+  --ivory-2: #f4f4f4;
+  --cream: #f4f4f4;
+  --bg: #ffffff;
+  --bg-2: #f4f4f4;
+  --fg: #000000;
+  --fg-soft: rgba(0,0,0,0.62);
+  --fg-mute: rgba(0,0,0,0.42);
+  --rule: rgba(0,0,0,0.10);
   --sans: "Mona Sans","Manrope",-apple-system,"Helvetica Neue",Arial,sans-serif;
   --display: "Mona Sans","Manrope",-apple-system,"Helvetica Neue",Arial,sans-serif;
   --mono: "JetBrains Mono",ui-monospace,"SF Mono",Menlo,monospace;
@@ -137,7 +137,7 @@ button { font: inherit; cursor: pointer; border: 0; background: transparent; col
 .crew-track { display: flex; gap: 24px; transition: transform 0.5s var(--ease-out); }
 .crew-card { flex: 0 0 220px; }
 .crew-portrait { width: 100%; aspect-ratio: 3/4; background: var(--bg-2); border-radius: 2px; margin-bottom: 16px; overflow: hidden; position: relative; display: block; }
-.crew-portrait-placeholder { width: 100%; height: 100%; background: linear-gradient(135deg,#506054,#1d3023); display: flex; align-items: center; justify-content: center; }
+.crew-portrait-placeholder { width: 100%; height: 100%; background: linear-gradient(135deg,#333,#000); display: flex; align-items: center; justify-content: center; }
 .crew-portrait-placeholder span { font-family: var(--display); font-weight: 800; font-size: 32px; color: rgba(244,239,230,0.3); }
 .crew-name { font-family: var(--display); font-weight: 700; font-size: 17px; letter-spacing: -0.01em; margin: 0 0 4px; }
 .crew-role { font-size: 13px; color: var(--fg-mute); margin: 0; }
@@ -150,7 +150,7 @@ button { font: inherit; cursor: pointer; border: 0; background: transparent; col
 .wcard { display: block; cursor: pointer; }
 .wcard-img { width: 100%; aspect-ratio: 16/10; background: var(--ivory-2); border-radius: 2px; overflow: hidden; position: relative; transition: transform 0.5s var(--ease-out); }
 .wcard:hover .wcard-img { transform: translateY(-4px); }
-.wcard-placeholder { width: 100%; height: 100%; background: linear-gradient(135deg,#eae4d8,#d8d0c4); display: flex; align-items: center; justify-content: center; }
+.wcard-placeholder { width: 100%; height: 100%; background: linear-gradient(135deg,#e5e5e5,#d0d0d0); display: flex; align-items: center; justify-content: center; }
 .wcard-placeholder span { font-family: var(--display); font-weight: 800; font-size: clamp(16px,2vw,28px); color: rgba(20,36,26,0.2); text-align: center; padding: 24px; }
 .wcard-hover { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 18px; color: var(--ivory); background: rgba(20,36,26,0.78); opacity: 0; transition: opacity 0.4s var(--ease-out); text-align: center; padding: 28px; }
 .wcard:hover .wcard-hover { opacity: 1; }
@@ -193,7 +193,7 @@ button { font: inherit; cursor: pointer; border: 0; background: transparent; col
 .crew-card:hover .crew-photo-gif { opacity: 1; }
 .nav-drop { position: relative; }
 .nav-drop-panel { position: absolute; top: calc(100% + 4px); left: -20px; background: var(--bg); border: 1px solid var(--rule); min-width: 180px; padding: 8px 0; opacity: 0; pointer-events: none; transform: translateY(6px); transition: opacity 0.25s var(--ease-out), transform 0.25s var(--ease-out); box-shadow: 0 18px 60px rgba(0,0,0,0.06); z-index: 200; }
-.nav.on-dark:not(.scrolled) .nav-drop-panel { background: #243329; border-color: rgba(244,239,230,0.08); }
+.nav.on-dark:not(.scrolled) .nav-drop-panel { background: #0e0e0e; border-color: rgba(244,239,230,0.08); }
 .nav-drop:hover .nav-drop-panel, .nav-drop:focus-within .nav-drop-panel { opacity: 1; pointer-events: auto; transform: translateY(0); }
 .nav-drop-panel a { display: block; padding: 12px 24px; font-size: 14px; font-weight: 400; letter-spacing: 0; text-transform: none; color: var(--fg-soft); transition: color 0.2s, background-color 0.2s; }
 .nav-drop-panel a:hover { color: var(--rust); background: rgba(20,36,26,0.03); }
