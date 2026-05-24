@@ -82,7 +82,7 @@ export default function AnnouncementCard() {
       <div style={{display:"flex",alignItems:"center",justifyContent:"space-between"}}>
         <div style={{display:"flex",alignItems:"center",gap:8}}>
           <span style={{width:7,height:7,borderRadius:"50%",background:"#b94a26",display:"block",flexShrink:0}} />
-          <span style={{fontFamily:"var(--mono)",fontSize:10,letterSpacing:"0.32em",textTransform:"uppercase",color:"rgba(255,255,255,0.55)"}}>What&apos;s new</span>
+          <span style={{fontFamily:"'Montserrat', var(--sans)",fontSize:9,fontWeight:700,letterSpacing:"0.38em",textTransform:"uppercase",color:"rgba(255,255,255,0.5)"}}>What&apos;s new</span>
         </div>
         <div style={{display:"flex",alignItems:"center",gap:12}}>
           {multi && <span style={{fontFamily:"var(--mono)",fontSize:10,color:"rgba(255,255,255,0.4)",letterSpacing:"0.1em"}}>0{current+1} / 0{ANNOUNCEMENTS.length}</span>}
@@ -92,7 +92,7 @@ export default function AnnouncementCard() {
 
       {/* Body */}
       <div aria-live="polite">
-        <p style={{fontFamily:"var(--sans)",fontWeight:500,fontSize:15,lineHeight:1.45,letterSpacing:"-0.012em",color:"rgba(255,255,255,0.9)",margin:0}}>
+        <p style={{fontFamily:"'Montserrat', var(--sans)",fontWeight:400,fontSize:14,lineHeight:1.5,letterSpacing:"0.01em",color:"rgba(255,255,255,0.85)",margin:0}}>
           {ann.text}
         </p>
       </div>
@@ -103,7 +103,7 @@ export default function AnnouncementCard() {
           href={ann.ctaUrl}
           target={ann.opensInNewTab ? "_blank" : undefined}
           rel={ann.opensInNewTab ? "noopener noreferrer" : undefined}
-          style={{display:"flex",alignItems:"center",justifyContent:"space-between",textDecoration:"none",color:"rgba(255,255,255,0.8)",fontFamily:"var(--mono)",fontSize:10,letterSpacing:"0.22em",textTransform:"uppercase"}}
+          style={{display:"flex",alignItems:"center",justifyContent:"space-between",textDecoration:"none",color:"rgba(255,255,255,0.8)",fontFamily:"'Montserrat', var(--sans)",fontSize:9,fontWeight:700,letterSpacing:"0.3em",textTransform:"uppercase"}}
           className="ann-cta"
         >
           {ann.ctaLabel}
