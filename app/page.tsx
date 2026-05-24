@@ -4,6 +4,7 @@ import { client, urlFor } from '@/lib/sanity'
 import { heroSlidesQuery, testimonialsQuery, teamMembersQuery, featuredCaseStudiesQuery } from '@/lib/queries'
 import Link from 'next/link'
 import Services from '@/components/Services'
+import AnnouncementCard from '@/components/AnnouncementCard'
 
 const LOGOS = ['NETFLIX',"McDONALD'S",'META','SQUARE','THE CHEESECAKE FACTORY','MOVELLA','BUMBLE','DUTCH BARN']
 
