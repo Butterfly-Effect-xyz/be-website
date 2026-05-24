@@ -83,7 +83,8 @@ export default async function HomePage() {
           filter:'blur(30px)',
         }} />
 
-        <div className="hero-stage" id="hero-stage" style={{position:'relative',zIndex:2}}>
+        <div className="hero-stage" id="hero-stage" style={{position:'relative',zIndex:2,display:'flex',alignItems:'center'}}>
+        <AnnouncementCard />
           {heroSlides.map((slide: any, i: number) => (
             <article key={slide._id} className={`hero-slide${i === 0 ? ' is-active' : ''}`}>
               <div className="hero-slide-inner">
@@ -100,7 +101,6 @@ export default async function HomePage() {
             </article>
           ))}
         </div>
-        <AnnouncementCard />
         <div className="hero-foot" style={{position:'relative',zIndex:2}}>
           <div className="hero-dots" id="hero-dots">
             {heroSlides.map((_: any, i: number) => (
