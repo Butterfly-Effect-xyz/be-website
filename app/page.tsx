@@ -55,7 +55,7 @@ export default async function HomePage() {
   return (
     <main data-hero-dark="1">
       {/* HERO */}
-      <section className="hero" id="hero" style={{position:'relative',overflow:'hidden'}}>
+      <section className="hero" id="hero" style={{position:'relative',overflow:'hidden',minHeight:'78vh'}}>
         {/* Aura glow - moss + earth */}
         <div style={{
           position:'absolute',
@@ -100,6 +100,7 @@ export default async function HomePage() {
             </article>
           ))}
         </div>
+        <AnnouncementCard />
         <div className="hero-foot" style={{position:'relative',zIndex:2}}>
           <div className="hero-dots" id="hero-dots">
             {heroSlides.map((_: any, i: number) => (
