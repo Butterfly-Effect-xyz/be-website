@@ -4,9 +4,9 @@ export const featuredCaseStudiesQuery = `*[_type == "caseStudy" && featured == t
 
 export const allCaseStudiesQuery = `*[_type == "caseStudy"] | order(displayOrder asc) { _id, title, slug, client, "heroImageUrl": heroImage.asset->url, heroLabel, heroHeadline, heroSubhead, summary, services, year, featured, displayOrder, results[] { stat, label } }`
 
-export const caseStudyBySlugQuery = `*[_type == "caseStudy" && slug.current == $slug][0] { _id, title, slug, client, heroImage { asset-> }, heroLabel, heroHeadline, heroSubhead, summary, services, year, results[] { stat, label }, theChallenge, approach { blueprint, build, broadcast }, testimonial { quote, attribution } }`
+export const caseStudyBySlugQuery = `*[_type == "caseStudy" && slug.current == $slug][0] { _id, title, slug, client, "heroImageUrl": heroImage.asset->url, heroLabel, heroHeadline, heroSubhead, summary, services, year, results[] { stat, label }, theChallenge, challengeHeading, approachHeading, approach { blueprint, blueprintKicker, blueprintTitle, build, buildKicker, buildTitle, broadcast, broadcastKicker, broadcastTitle }, resultsHeading, resultsSummary, testimonial { quote, attribution } }`
 
-export const teamMembersQuery = `*[_type == "teamMember"] | order(order asc) { _id, name, role, photo, order }`
+export const teamMembersQuery = `*[_type == "teamMember"] | order(order asc) { _id, name, role, bio, photo, hoverGif, order }`
 
 export const testimonialsQuery = `*[_type == "testimonial"] | order(order asc) { _id, quote, attribution, order }`
 
