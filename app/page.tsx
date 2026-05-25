@@ -1,10 +1,27 @@
 export const revalidate = 60
 
 import { client, urlFor } from '@/lib/sanity'
-import { heroSlidesQuery, testimonialsQuery, teamMembersQuery, featuredCaseStudiesQuery } from '@/lib/queries'
+import { heroSlidesQuery, testimonialsQuery, teamMembersQuery, featuredCaseStudiesQuery, homeAnnouncementsQuery } from '@/lib/queries'
 import Link from 'next/link'
 import Services from '@/components/Services'
-import AnnouncementCard from '@/components/AnnouncementCard'
+
+// Minimal portable-text renderer (bold, italic, links)
+function renderBlock(block: any) {
+  const markDefs: any[] = block.markDefs ?? []
+  return (block.children ?? [])
+    .filter((c: any) => c._type === 'span' && c.text && c.text !== '\n')
+    .map((child: any) => {
+      const linkKey = (child.marks as string[])?.find((m: string) =>
+        markDefs.some((d: any) => d._key === m && d._type === 'link')
+      )
+      const linkDef = linkKey ? markDefs.find((d: any) => d._key === linkKey) : null
+      let node: React.ReactNode = child.text
+      if (child.marks?.includes('strong')) node = <strong key="b" style={{fontWeight:700}}>{node}</strong>
+      if (child.marks?.includes('em'))     node = <em key="i">{node}</em>
+      if (linkDef) return <a key={child._key} href={linkDef.href} target="_blank" rel="noopener noreferrer" style={{color:'inherit',textDecoration:'underline',textUnderlineOffset:3,textDecorationColor:'rgba(255,255,255,0.3)'}}>{node}</a>
+      return <span key={child._key}>{node}</span>
+    })
+}
 
 const LOGOS = ['NETFLIX',"McDONALD'S",'META','SQUARE','THE CHEESECAKE FACTORY','MOVELLA','BUMBLE','DUTCH BARN']
 
@@ -17,18 +34,22 @@ const SERVICES = [
 
 async function getData() {
   try {
-    const [slides, testimonials, team, featured] = await Promise.all([
+    const [slides, testimonials, team, featured, announcement] = await Promise.all([
       client.fetch(heroSlidesQuery),
       client.fetch(testimonialsQuery),
       client.fetch(teamMembersQuery),
       client.fetch(featuredCaseStudiesQuery),
+      client.fetch(homeAnnouncementsQuery),
     ])
-    return { slides: slides?.length ? slides : null, testimonials: testimonials || [], team: team || [], featured: featured || [] }
-  } catch { return { slides: null, testimonials: [], team: [], featured: [] } }
+    return { slides: slides?.length ? slides : null, testimonials: testimonials || [], team: team || [], featured: featured || [], announcement: announcement || null }
+  } catch { return { slides: null, testimonials: [], team: [], featured: [], announcement: null } }
 }
 
 export default async function HomePage() {
-  const { slides, testimonials, team, featured: sanityFeatured } = await getData()
+  const { slides, testimonials, team, featured: sanityFeatured, announcement } = await getData()
+  const annBlocks: any[] = (announcement?.text ?? []).filter(
+    (b: any) => b._type === 'block' && b.children?.some((c: any) => c.text?.replace('\n','').trim())
+  )
 
   const heroSlides = slides || [
     { _id:'1', kicker:'Mission', headline:'We build the trust that turns audiences into communities.', dek:'Seize the void.', ctaLabel:'Our mission', ctaHref:'/mission' },
@@ -122,21 +143,43 @@ export default async function HomePage() {
             </article>
           ))}
         </div>
+
+        {/* RIGHT PANEL — notices + companies */}
+        <div className="hero-panel" style={{position:'absolute',top:'50%',right:32,transform:'translateY(-50%)',width:300,zIndex:10,display:'flex',flexDirection:'column',gap:10}}>
+
+          {/* What's new */}
+          {annBlocks.length > 0 && (
+            <div style={{background:'rgba(255,255,255,0.05)',border:'1px solid rgba(255,255,255,0.11)',borderRadius:14,padding:'14px 16px',backdropFilter:'blur(16px)',WebkitBackdropFilter:'blur(16px)'}}>
+              <div style={{display:'flex',alignItems:'center',gap:7,marginBottom:12}}>
+                <span style={{width:6,height:6,borderRadius:'50%',background:'#b94a26',display:'block',flexShrink:0}} />
+                <span style={{fontFamily:'var(--mono)',fontSize:9,fontWeight:700,letterSpacing:'0.4em',textTransform:'uppercase',color:'rgba(255,255,255,0.42)'}}>What&apos;s new</span>
+              </div>
+              {annBlocks.map((block: any, i: number) => (
+                <div key={block._key} style={{display:'flex',gap:10,padding:'9px 0',borderTop:i>0?'1px solid rgba(255,255,255,0.06)':'none',alignItems:'flex-start'}}>
+                  <span style={{fontFamily:'var(--mono)',fontSize:9,color:'rgba(255,255,255,0.22)',flexShrink:0,marginTop:2,letterSpacing:'0.08em'}}>{String(i+1).padStart(2,'0')}</span>
+                  <p style={{fontFamily:'var(--sans)',fontSize:12,lineHeight:1.55,color:'rgba(255,255,255,0.68)',margin:0}}>{renderBlock(block)}</p>
+                </div>
+              ))}
+            </div>
+          )}
+
+          {/* Companies */}
+          <div style={{background:'rgba(255,255,255,0.04)',border:'1px solid rgba(255,255,255,0.08)',borderRadius:14,padding:'14px 16px',backdropFilter:'blur(16px)',WebkitBackdropFilter:'blur(16px)'}}>
+            <span style={{fontFamily:'var(--mono)',fontSize:9,fontWeight:700,letterSpacing:'0.38em',textTransform:'uppercase',color:'rgba(255,255,255,0.32)',display:'block',marginBottom:12}}>Who we&apos;ve worked with</span>
+            <div style={{display:'flex',flexWrap:'wrap',gap:'7px 10px'}}>
+              {LOGOS.map(logo => (
+                <span key={logo} style={{fontFamily:'var(--sans)',fontSize:10,fontWeight:700,letterSpacing:'0.06em',color:'rgba(255,255,255,0.38)',whiteSpace:'nowrap'}}>{logo}</span>
+              ))}
+            </div>
+          </div>
+
+        </div>
         <div className="hero-foot" style={{position:'relative',zIndex:2}}>
           <div className="hero-dots" id="hero-dots">
             {heroSlides.map((_: any, i: number) => (
               <button key={i} className={`hero-dot${i === 0 ? ' is-active' : ''}`} aria-label={`Slide ${i+1}`} />
             ))}
           </div>
-        </div>
-      </section>
-
-      <AnnouncementCard />
-
-      {/* LOGO STRIP */}
-      <section className="logo-strip">
-        <div className="logo-strip-track">
-          {[...LOGOS,...LOGOS].map((name,i) => <span key={i} className="logo-strip-item">{name}</span>)}
         </div>
       </section>
 
