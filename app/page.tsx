@@ -4,6 +4,7 @@ import { client, urlFor } from '@/lib/sanity'
 import { heroSlidesQuery, testimonialsQuery, teamMembersQuery, featuredCaseStudiesQuery, homeAnnouncementsQuery } from '@/lib/queries'
 import Link from 'next/link'
 import Services from '@/components/Services'
+import HeroNotice from '@/components/HeroNotice'
 
 // Minimal portable-text renderer (bold, italic, links)
 function renderBlock(block: any) {
@@ -144,26 +145,7 @@ export default async function HomePage() {
           ))}
         </div>
 
-        {/* RIGHT PANEL — notices */}
-        <div className="hero-panel" style={{position:'absolute',top:'50%',right:80,transform:'translateY(-50%)',width:360,zIndex:10,display:'flex',flexDirection:'column',gap:10}}>
-
-          {/* What's new */}
-          {annBlocks.length > 0 && (
-            <div style={{background:'rgba(255,255,255,0.05)',border:'1px solid rgba(255,255,255,0.11)',borderRadius:14,padding:'14px 16px',backdropFilter:'blur(16px)',WebkitBackdropFilter:'blur(16px)'}}>
-              <div style={{display:'flex',alignItems:'center',gap:7,marginBottom:12}}>
-                <span style={{width:6,height:6,borderRadius:'50%',background:'#b94a26',display:'block',flexShrink:0}} />
-                <span style={{fontFamily:'var(--mono)',fontSize:9,fontWeight:700,letterSpacing:'0.4em',textTransform:'uppercase',color:'rgba(255,255,255,0.42)'}}>What&apos;s new</span>
-              </div>
-              {annBlocks.map((block: any, i: number) => (
-                <div key={block._key} style={{display:'flex',gap:10,padding:'9px 0',borderTop:i>0?'1px solid rgba(255,255,255,0.06)':'none',alignItems:'flex-start'}}>
-                  <span style={{fontFamily:'var(--mono)',fontSize:9,color:'rgba(255,255,255,0.22)',flexShrink:0,marginTop:2,letterSpacing:'0.08em'}}>{String(i+1).padStart(2,'0')}</span>
-                  <p style={{fontFamily:'var(--sans)',fontSize:12,lineHeight:1.55,color:'rgba(255,255,255,0.68)',margin:0}}>{renderBlock(block)}</p>
-                </div>
-              ))}
-            </div>
-          )}
-
-        </div>
+        <HeroNotice blocks={annBlocks} />
         <div className="hero-foot" style={{position:'relative',zIndex:2}}>
           <div className="hero-dots" id="hero-dots">
             {heroSlides.map((_: any, i: number) => (
