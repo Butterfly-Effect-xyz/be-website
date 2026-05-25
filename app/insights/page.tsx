@@ -70,24 +70,9 @@ export default function InsightsPage() {
         </div>
       </section>
 
-      <section id="articles" style={{padding:"64px 0 96px",background:"#f4f4f4"}}>
+      <section id="articles" style={{padding:"80px 0",background:"#f4f4f4",textAlign:"center"}}>
         <div style={{maxWidth:1280,margin:"0 auto",padding:"0 40px"}}>
-          <h2 style={{fontFamily:"var(--display)",fontWeight:800,fontSize:"clamp(28px,3vw,44px)",letterSpacing:"-0.02em",margin:"0 0 48px"}}>Articles &amp; More</h2>
-          <div style={{display:"grid",gridTemplateColumns:"repeat(3,minmax(0,1fr))",gap:"clamp(36px,4vw,72px) clamp(24px,3vw,48px)"}}>
-            {ARTICLES.map((item, i) => (
-              <a key={i} href={item.url} target={item.url.startsWith("http") ? "_blank" : undefined} rel="noopener noreferrer"
-                style={{display:"flex",flexDirection:"column",gap:16,textDecoration:"none",color:"inherit"}}
-                className="ins-card">
-                <div style={{aspectRatio:"16/9",background:"#e5e5e5",borderRadius:2,position:"relative",overflow:"hidden",display:"flex",alignItems:"center",justifyContent:"center"}}>
-                  <span style={{fontFamily:"var(--display)",fontWeight:800,fontSize:48,color:"rgba(0,0,0,0.08)"}}>BE</span>
-                </div>
-                <p style={{fontFamily:"var(--sans)",fontSize:11,fontWeight:600,letterSpacing:"0.28em",textTransform:"uppercase",color:"#b94a26",margin:0}}>Article</p>
-                <h3 style={{fontFamily:"var(--display)",fontWeight:800,fontSize:"clamp(18px,1.6vw,22px)",lineHeight:1.18,letterSpacing:"-0.01em",margin:0}} className="ins-title">{item.title}</h3>
-                <p style={{fontFamily:"var(--sans)",fontSize:14,lineHeight:1.55,color:"rgba(0,0,0,0.42)",margin:0}}>{item.blurb}</p>
-                <p style={{fontFamily:"var(--sans)",fontSize:13,color:"rgba(0,0,0,0.32)",margin:0}}>{item.show} · {item.date}</p>
-              </a>
-            ))}
-          </div>
+          <p style={{fontFamily:"var(--display)",fontWeight:800,fontSize:"clamp(28px,3vw,48px)",letterSpacing:"-0.02em",margin:0,color:"#000"}}>Loads of free smoke to come...</p>
         </div>
       </section>
 
