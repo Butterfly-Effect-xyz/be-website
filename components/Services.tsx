@@ -44,7 +44,7 @@ export default function Services() {
                   minHeight:520,
                   padding:36,
                   overflow:"hidden",
-                  background: isOpen ? "#000" : "transparent",
+                  background: isOpen ? "#000" : s.bg,
                   color: isOpen ? "#fff" : "#000",
                   borderRight:"1px solid rgba(22,30,27,0.15)",
                   display:"flex",
