@@ -88,7 +88,7 @@ export default async function CatalystPage() {
           pointerEvents: 'none',
         }} />
 
-        {/* Sign in / Register – top right */}
+        {/* Sign in / Register / Contact – top right */}
         <div style={{
           position:   'absolute',
           top:        96,
@@ -120,6 +120,19 @@ export default async function CatalystPage() {
             borderRadius:   2,
             transition:     'border-color 0.2s, background 0.2s',
           }}>Register</a>
+          <a href="/contact" style={{
+            fontFamily:     'var(--sans)',
+            fontSize:       11,
+            fontWeight:     700,
+            letterSpacing:  '0.2em',
+            textTransform:  'uppercase',
+            color:          '#fff',
+            textDecoration: 'none',
+            background:     RUST,
+            padding:        '10px 22px',
+            borderRadius:   2,
+            transition:     'background 0.2s',
+          }}>Contact</a>
         </div>
 
         {/* Centred content */}
