@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import './globals.css'
 import QuickNav from '@/components/QuickNav'
+import MobileNav from '@/components/MobileNav'
 
 export const metadata: Metadata = {
   title: 'Butterfly Effect — Seize the void',
@@ -39,6 +40,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               </div>
               <a href="/catalyst" className="nav-link">Catalyst</a>
             </div>
+            <MobileNav />
             <a href="/contact" className="nav-cta">
               Let&apos;s talk
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" style={{width:16,height:16}}><path d="M5 12h14M13 5l7 7-7 7"/></svg>
