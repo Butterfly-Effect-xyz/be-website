@@ -14,9 +14,10 @@ const client = createClient({
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 
-export async function generateMetadata({ params }: { params: { slug: string } }) {
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
   try {
-    const work = await client.fetch(caseStudyBySlugQuery, { slug: params.slug })
+    const { slug } = await params
+    const work = await client.fetch(caseStudyBySlugQuery, { slug })
     return { title: work ? `${work.client} — ${work.heroHeadline} · Butterfly Effect` : 'Case Study · Butterfly Effect' }
   } catch { return { title: 'Case Study · Butterfly Effect' } }
 }
@@ -25,9 +26,10 @@ export async function generateStaticParams() {
   try { const w = await client.fetch(allCaseStudiesQuery); return w.map((i: any) => ({slug: i.slug?.current})).filter(Boolean) } catch { return [] }
 }
 
-export default async function CaseStudyPage({ params }: { params: { slug: string } }) {
+export default async function CaseStudyPage({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params
   let work: any = null
-  try { work = await client.fetch(caseStudyBySlugQuery, { slug: params.slug }); console.log('WORK:', JSON.stringify(work)); } catch(e) { console.log('ERROR:', e) }
+  try { work = await client.fetch(caseStudyBySlugQuery, { slug }); console.log('WORK:', JSON.stringify(work)); } catch(e) { console.log('ERROR:', e) }
   if (!work) return <main style={{padding:'120px 40px',textAlign:'center'}}><h1 style={{fontFamily:'var(--display)',fontWeight:800,fontSize:48}}>404 — Not found</h1><a href='/work' style={{display:'inline-block',marginTop:32}}>← Back to work</a></main>
 
   const heroImageUrl = work.heroImageUrl || (work.heroImage ? urlFor(work.heroImage).width(1600).height(900).url() : null)
@@ -75,7 +77,7 @@ export default async function CaseStudyPage({ params }: { params: { slug: string
           {/* LEFT COLUMN */}
           <div>
             {/* SECTION 01 - CHALLENGE */}
-            {work.theChallenge && (
+            {work.challenge && (
               <section style={{marginBottom:80}}>
                 <span style={{fontFamily:'var(--mono)',fontSize:11,letterSpacing:'0.28em',textTransform:'uppercase',color:'var(--rust)',display:'block',marginBottom:24}}>
                   01 / THE CHALLENGE
@@ -84,7 +86,7 @@ export default async function CaseStudyPage({ params }: { params: { slug: string
                   {work.challengeHeading || 'The challenge'}
                 </h2>
                 <p style={{fontSize:16,lineHeight:1.7,color:'var(--fg-soft)',margin:0,maxWidth:'58ch'}}>
-                  {work.theChallenge}
+                  {work.challenge}
                 </p>
               </section>
             )}
