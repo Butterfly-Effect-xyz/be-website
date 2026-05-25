@@ -3,6 +3,7 @@ export const revalidate = 60
 import { client, urlFor } from '@/lib/sanity'
 import { allCaseStudiesQuery } from '@/lib/queries'
 import Link from 'next/link'
+import WorkGrid from '@/components/WorkGrid'
 
 const FALLBACK = [
   { _id:'1', heroHeadline:'The Spirit of Comedy', client:'Dutch Barn Vodka', services:['Influencer','Creative','Social','Strategy'], slug:{current:'dutch-barn-vodka-spirit-of-comedy'}, heroImage:null, results:[{stat:'+1,300%',label:'Revenue YoY'},{stat:'+388%',label:'Audience Growth'}] },
@@ -28,40 +29,7 @@ export default async function WorkPage() {
         <h1 className="t-display" style={{maxWidth:'14ch'}}>Our <em>work.</em></h1>
         <p className="t-lede" style={{marginTop:32}}>Campaigns, brands, and moments that moved the needle.</p>
       </section>
-      <section className="container" style={{paddingBottom:40}}>
-        <div className="work-filters">
-          {['All','Brand','Influencer','Creative','Social','Strategy'].map(cat => (
-            <button key={cat} className={'work-filter' + (cat==='All' ? ' is-active' : '')}>{cat}</button>
-          ))}
-        </div>
-      </section>
-      <section className="container" style={{paddingBottom:140}}>
-        <div className="work-grid">
-          {works.map((w: any) => (
-            <Link key={w._id} href={'/work/' + w.slug?.current} className="wcard">
-              <div className="wcard-img">
-                {w.heroImageUrl
-                  ? <img src={w.heroImageUrl} alt={w.heroHeadline} style={{width:'100%',height:'100%',objectFit:'cover'}} />
-                  : <div className="wcard-placeholder" style={{background:"linear-gradient(135deg,#1d3023,#506054)"}}><span style={{color:"rgba(244,239,230,0.25)",fontFamily:"var(--display)",fontWeight:800,fontSize:"clamp(14px,2vw,24px)",textAlign:"center",padding:"24px"}}>{w.client}</span></div>
-                }
-                <div className="wcard-hover">
-                  <span className="wcard-hover-cta">View case study <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" style={{width:14,height:14}}><path d="M5 12h14M13 5l7 7-7 7"/></svg></span>
-                  {w.results?.length > 0 && (
-                    <div className="wcard-hover-results">
-                      {w.results.slice(0,4).map((r: any, i: number) => (
-                        <div key={i} className="wcard-hover-result"><span className="v">{r.stat}</span><span className="l">{r.label}</span></div>
-                      ))}
-                    </div>
-                  )}
-                </div>
-              </div>
-              <div className="wcard-tags">{w.services?.map((s: string) => <span key={s}>{s}</span>)}</div>
-              <p className="wcard-campaign">{w.client}</p>
-              <h3 className="wcard-title">{w.heroHeadline || w.title}</h3>
-            </Link>
-          ))}
-        </div>
-      </section>
+      <WorkGrid works={works} />
     </main>
   )
 }
