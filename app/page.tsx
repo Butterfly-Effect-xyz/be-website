@@ -229,17 +229,15 @@ export default async function HomePage() {
                       ? <img
                           src={urlFor(m.photo).width(440).height(580).url()}
                           alt={m.name}
-                          style={{width:'100%',height:'100%',objectFit:'cover',position:'absolute',inset:0,transition:'opacity 0.3s'}}
                           className="crew-photo-static"
                         />
                       : <div className="crew-portrait-placeholder"><span>{m.name.split(' ').map((n:string)=>n[0]).join('')}</span></div>
                     }
-                    {m.hoverGif && (
+                    {m.hoverGifUrl && (
                       <img
-                        src={urlFor(m.hoverGif).url()}
+                        src={m.hoverGifUrl}
                         alt=""
                         aria-hidden="true"
-                        style={{width:'100%',height:'100%',objectFit:'cover',position:'absolute',inset:0,opacity:0,transition:'opacity 0.3s'}}
                         className="crew-photo-gif"
                       />
                     )}

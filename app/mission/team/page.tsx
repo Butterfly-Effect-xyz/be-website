@@ -33,15 +33,13 @@ export default async function TeamPage() {
                 <div style={{aspectRatio:"3/4",background:"#f0f0f0",borderRadius:2,overflow:"hidden",position:"relative"}}>
                   {m.photo
                     ? <img src={urlFor(m.photo).width(400).height(533).url()} alt={m.name}
-                        style={{width:"100%",height:"100%",objectFit:"cover",position:"absolute",inset:0,transition:"opacity 0.3s"}}
                         className="crew-photo-static" />
                     : <div style={{width:"100%",height:"100%",background:"linear-gradient(135deg,#333,#000)",display:"flex",alignItems:"center",justifyContent:"center"}}>
                         <span style={{fontFamily:"var(--display)",fontWeight:800,fontSize:32,color:"rgba(255,255,255,0.2)"}}>{m.name.split(" ").map((n:string)=>n[0]).join("")}</span>
                       </div>
                   }
-                  {m.hoverGif && (
-                    <img src={urlFor(m.hoverGif).url()} alt="" aria-hidden
-                      style={{width:"100%",height:"100%",objectFit:"cover",position:"absolute",inset:0,opacity:0,transition:"opacity 0.15s ease"}}
+                  {m.hoverGifUrl && (
+                    <img src={m.hoverGifUrl} alt="" aria-hidden
                       className="crew-photo-gif" />
                   )}
                 </div>
