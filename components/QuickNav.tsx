@@ -4,12 +4,13 @@ import { useState } from 'react'
 import Link from 'next/link'
 
 const NAV_ITEMS = [
-  { label: 'Our work', href: '/work', num: '01' },
-  { label: 'Our story', href: '/mission#story', num: '02' },
-  { label: 'Our mission', href: '/mission', num: '03' },
-  { label: 'Butterfly Effect Careers', href: '/mission#careers', num: '04' },
-  { label: 'Free Sauce', href: '/insights', num: '05' },
-  { label: 'Get in contact', href: '/contact', num: '06' },
+  { label: 'Our Work',                 href: '/work',             num: '01' },
+  { label: 'Our Mission',              href: '/mission',          num: '02' },
+  { label: 'Our Team',                 href: '/mission/team',     num: '03' },
+  { label: 'Butterfly Effect Careers', href: '/mission/careers',  num: '04' },
+  { label: 'Free Sauce',               href: '/insights',         num: '05' },
+  { label: 'Get in Contact',           href: '/contact',          num: '06' },
+  { label: 'Catalyst',                 href: '/catalyst',         num: '07', badge: 'Soon' },
 ]
 
 export default function QuickNav() {
@@ -99,7 +100,14 @@ export default function QuickNav() {
                 transition:'background 0.2s',
               }}
             >
-              <span style={{fontFamily:'var(--display)',fontWeight:700,fontSize:18,letterSpacing:'-0.01em'}}>{item.label}</span>
+              <div style={{display:'flex',alignItems:'center',gap:8}}>
+                <span style={{fontFamily:'var(--display)',fontWeight:700,fontSize:18,letterSpacing:'-0.01em'}}>{item.label}</span>
+                {item.badge && (
+                  <span style={{fontFamily:'var(--mono)',fontSize:8,fontWeight:700,letterSpacing:'0.18em',textTransform:'uppercase',background:'rgba(181,69,42,0.12)',color:'#b5452a',padding:'2px 7px',borderRadius:100,lineHeight:1.6}}>
+                    {item.badge}
+                  </span>
+                )}
+              </div>
               <div style={{display:'flex',alignItems:'center',gap:16}}>
                 <span style={{fontFamily:'var(--mono)',fontSize:11,color:'rgba(0,0,0,0.3)',letterSpacing:'0.1em'}}>{item.num}</span>
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" style={{width:16,height:16}}><path d="M5 12h14M13 5l7 7-7 7"/></svg>
