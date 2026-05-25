@@ -6,6 +6,8 @@ export const allCaseStudiesQuery = `*[_type == "caseStudy"] | order(order asc) {
 
 export const caseStudyBySlugQuery = `*[_type == "caseStudy" && slug.current == $slug][0] { _id, title, slug, client, "heroImageUrl": heroImage.asset->url, heroLabel, heroHeadline, heroSubhead, summary, services, year, results[] { stat, label }, challenge, challengeHeading, approachHeading, approach { blueprint, blueprintKicker, blueprintTitle, build, buildKicker, buildTitle, broadcast, broadcastKicker, broadcastTitle }, resultsHeading, resultsSummary, testimonial { quote, attribution } }`
 
+export const homeAnnouncementsQuery = `*[_type == "homeAnnouncement" && isActive == true] | order(order asc)[0] { _id, text }`
+
 export const teamMembersQuery = `*[_type == "teamMember"] | order(order asc) { _id, name, role, bio, photo, "hoverGifUrl": hoverGif.asset->url, order }`
 
 export const testimonialsQuery = `*[_type == "testimonial"] | order(order asc) { _id, quote, attribution, order }`

@@ -1,152 +1,134 @@
-"use client"
-import { useState, useEffect, useRef } from "react"
-import Link from "next/link"
+import { client } from '@/lib/sanity'
+import { homeAnnouncementsQuery } from '@/lib/queries'
 
-const ANNOUNCEMENTS = [
-  {
-    _key: "1",
-    text: <>We launched <b>Coding the Chaos</b>, a new YouTube series for Formula E hosted by Jeremiah Burton.</>,
-    ctaLabel: "Watch the first episode",
-    ctaUrl: "/insights",
-    opensInNewTab: false,
-  },
-  {
-    _key: "2",
-    text: <>Michael just dropped a piece on <b>influencer marketing in the 21st century</b> over on LinkedIn.</>,
-    ctaLabel: "Click for the sauce",
-    ctaUrl: "https://linkedin.com",
-    opensInNewTab: true,
-  },
-]
+// Minimal portable-text renderer covering the marks used in this content
+function renderBlock(block: any) {
+  const children: any[] = block.children ?? []
+  const markDefs: any[] = block.markDefs ?? []
 
-export default function AnnouncementCard() {
-  const [current, setCurrent] = useState(0)
-  const [dismissed, setDismissed] = useState(false)
-  const [visible, setVisible] = useState(false)
-  const timerRef = useRef<NodeJS.Timeout | null>(null)
+  return children
+    .filter((c) => c._type === 'span' && c.text && c.text !== '\n')
+    .map((child) => {
+      // Resolve a link mark if present
+      const linkKey = (child.marks as string[])?.find((m) =>
+        markDefs.some((d) => d._key === m && d._type === 'link')
+      )
+      const linkDef = linkKey ? markDefs.find((d) => d._key === linkKey) : null
 
-  useEffect(() => {
-    if (sessionStorage.getItem("be_ann_dismissed")) { setDismissed(true); return }
-    const t = setTimeout(() => setVisible(true), 800)
-    return () => clearTimeout(t)
-  }, [])
+      const isBold   = child.marks?.includes('strong')
+      const isItalic = child.marks?.includes('em')
 
-  useEffect(() => {
-    if (!visible || dismissed) return
-    timerRef.current = setInterval(() => {
-      setCurrent(c => (c + 1) % ANNOUNCEMENTS.length)
-    }, 7000)
-    return () => { if (timerRef.current) clearInterval(timerRef.current) }
-  }, [visible, dismissed])
+      let node: React.ReactNode = child.text
+      if (isBold)   node = <strong style={{ fontWeight: 700 }}>{node}</strong>
+      if (isItalic) node = <em>{node}</em>
 
-  const go = (i: number) => {
-    if (timerRef.current) clearInterval(timerRef.current)
-    setCurrent((i + ANNOUNCEMENTS.length) % ANNOUNCEMENTS.length)
-  }
+      if (linkDef) {
+        return (
+          <a
+            key={child._key}
+            href={linkDef.href}
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{
+              color:           'inherit',
+              textDecoration:  'underline',
+              textUnderlineOffset: 3,
+              textDecorationColor: 'rgba(255,255,255,0.3)',
+            }}
+          >
+            {node}
+          </a>
+        )
+      }
 
-  const dismiss = () => {
-    sessionStorage.setItem("be_ann_dismissed", "1")
-    setDismissed(true)
-  }
+      return <span key={child._key}>{node}</span>
+    })
+}
 
-  if (dismissed || !visible || ANNOUNCEMENTS.length === 0) return null
+export default async function WhatsNew() {
+  let announcement: any = null
+  try { announcement = await client.fetch(homeAnnouncementsQuery) } catch { /* silent */ }
 
-  const ann = ANNOUNCEMENTS[current]
-  const multi = ANNOUNCEMENTS.length > 1
+  const blocks: any[] = (announcement?.text ?? []).filter(
+    (b: any) =>
+      b._type === 'block' &&
+      b.children?.some((c: any) => c.text?.replace('\n', '').trim())
+  )
+
+  if (!blocks.length) return null
 
   return (
-    <div
-      role="region"
-      aria-label="Site announcements"
-      onMouseEnter={() => { if (timerRef.current) clearInterval(timerRef.current) }}
-      style={{
-        position: "absolute",
-        top: "50%",
-        right: 32,
-        transform: "translateY(-50%)",
-        width: 340,
-        background: "rgba(255,255,255,0.06)",
-        border: "1px solid rgba(255,255,255,0.14)",
-        backdropFilter: "blur(14px)",
-        WebkitBackdropFilter: "blur(14px)",
-        borderRadius: 16,
-        padding: "16px 20px",
-        zIndex: 10,
-        display: "flex",
-        flexDirection: "column",
-        gap: 12,
-      }}
-      className="ann-card"
-    >
-      {/* Header */}
-      <div style={{display:"flex",alignItems:"center",justifyContent:"space-between"}}>
-        <div style={{display:"flex",alignItems:"center",gap:8}}>
-          <span style={{width:7,height:7,borderRadius:"50%",background:"#b94a26",display:"block",flexShrink:0}} />
-          <span style={{fontFamily:"'Montserrat', var(--sans)",fontSize:9,fontWeight:700,letterSpacing:"0.38em",textTransform:"uppercase",color:"rgba(255,255,255,0.5)"}}>What&apos;s new</span>
+    <section style={{
+      background:   '#0d0d0d',
+      borderBottom: '1px solid rgba(255,255,255,0.07)',
+    }}>
+      <div style={{ maxWidth: 1280, margin: '0 auto', padding: '0 40px' }}>
+
+        {/* Header row */}
+        <div style={{
+          display:      'flex',
+          alignItems:   'center',
+          gap:          8,
+          padding:      '18px 0',
+          borderBottom: '1px solid rgba(255,255,255,0.07)',
+        }}>
+          <span style={{
+            width:        6,
+            height:       6,
+            borderRadius: '50%',
+            background:   '#b94a26',
+            display:      'block',
+            flexShrink:   0,
+          }} />
+          <span style={{
+            fontFamily:    'var(--mono)',
+            fontSize:      9,
+            fontWeight:    700,
+            letterSpacing: '0.42em',
+            textTransform: 'uppercase',
+            color:         'rgba(255,255,255,0.4)',
+          }}>What&apos;s new</span>
         </div>
-        <div style={{display:"flex",alignItems:"center",gap:12}}>
-          {multi && <span style={{fontFamily:"var(--mono)",fontSize:10,color:"rgba(255,255,255,0.4)",letterSpacing:"0.1em"}}>0{current+1} / 0{ANNOUNCEMENTS.length}</span>}
-          <button onClick={dismiss} aria-label="Dismiss announcements" style={{background:"transparent",border:"none",color:"rgba(255,255,255,0.5)",cursor:"pointer",padding:0,fontSize:16,lineHeight:1}}>×</button>
-        </div>
-      </div>
 
-      {/* Body */}
-      <div aria-live="polite">
-        <p style={{fontFamily:"'Montserrat', var(--sans)",fontWeight:400,fontSize:14,lineHeight:1.5,letterSpacing:"0.01em",color:"rgba(255,255,255,0.85)",margin:0}}>
-          {ann.text}
-        </p>
-      </div>
+        {/* One row per block */}
+        {blocks.map((block, i) => (
+          <div
+            key={block._key}
+            style={{
+              display:      'grid',
+              gridTemplateColumns: '44px 1fr',
+              gap:          '0 20px',
+              padding:      '18px 0',
+              borderBottom: i < blocks.length - 1
+                ? '1px solid rgba(255,255,255,0.05)'
+                : 'none',
+              alignItems:   'baseline',
+            }}
+          >
+            <span style={{
+              fontFamily:    'var(--mono)',
+              fontSize:      10,
+              color:         'rgba(255,255,255,0.22)',
+              letterSpacing: '0.12em',
+            }}>
+              {String(i + 1).padStart(2, '0')}
+            </span>
 
-      {/* CTA */}
-      <div style={{borderTop:"1px solid rgba(255,255,255,0.1)",paddingTop:12}}>
-        <Link
-          href={ann.ctaUrl}
-          target={ann.opensInNewTab ? "_blank" : undefined}
-          rel={ann.opensInNewTab ? "noopener noreferrer" : undefined}
-          style={{display:"flex",alignItems:"center",justifyContent:"space-between",textDecoration:"none",color:"rgba(255,255,255,0.8)",fontFamily:"'Montserrat', var(--sans)",fontSize:9,fontWeight:700,letterSpacing:"0.3em",textTransform:"uppercase"}}
-          className="ann-cta"
-        >
-          {ann.ctaLabel}
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" style={{width:14,height:14,transition:"transform 0.2s"}}><path d="M5 12h14M13 5l7 7-7 7"/></svg>
-        </Link>
-      </div>
-
-      {/* Footer dots */}
-      {multi && (
-        <div style={{display:"flex",alignItems:"center",justifyContent:"space-between"}}>
-          <div style={{display:"flex",gap:6,alignItems:"center"}}>
-            {ANNOUNCEMENTS.map((_, i) => (
-              <button
-                key={i}
-                onClick={() => go(i)}
-                aria-label={`Announcement ${i+1}`}
-                style={{
-                  height:6,
-                  width: i === current ? 18 : 6,
-                  borderRadius:100,
-                  background: i === current ? "rgba(255,255,255,0.9)" : "rgba(255,255,255,0.3)",
-                  border:"none",
-                  cursor:"pointer",
-                  padding:0,
-                  transition:"all 0.3s ease",
-                }}
-              />
-            ))}
+            <p style={{
+              fontFamily:    'var(--sans)',
+              fontSize:      14,
+              lineHeight:    1.6,
+              color:         'rgba(255,255,255,0.72)',
+              margin:        0,
+              fontWeight:    400,
+              letterSpacing: '0.01em',
+            }}>
+              {renderBlock(block)}
+            </p>
           </div>
-          <div style={{display:"flex",gap:6}}>
-            {[[-1,"Previous"],[ 1,"Next"]].map(([dir, label]) => (
-              <button
-                key={label}
-                onClick={() => go(current + (dir as number))}
-                aria-label={label as string}
-                style={{width:28,height:28,borderRadius:"50%",border:"1px solid rgba(255,255,255,0.2)",background:"transparent",color:"rgba(255,255,255,0.6)",cursor:"pointer",display:"flex",alignItems:"center",justifyContent:"center"}}
-              >
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" style={{width:12,height:12,transform: dir === -1 ? "rotate(180deg)" : "none"}}><path d="M5 12h14M13 5l7 7-7 7"/></svg>
-              </button>
-            ))}
-          </div>
-        </div>
-      )}
-    </div>
+        ))}
+
+      </div>
+    </section>
   )
 }

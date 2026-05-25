@@ -106,7 +106,6 @@ export default async function HomePage() {
         }} />
 
         <div className="hero-stage" id="hero-stage" style={{position:'relative',zIndex:2,display:'flex',alignItems:'center'}}>
-        <AnnouncementCard />
           {heroSlides.map((slide: any, i: number) => (
             <article key={slide._id} className={`hero-slide${i === 0 ? ' is-active' : ''}`}>
               <div className="hero-slide-inner">
@@ -131,6 +130,8 @@ export default async function HomePage() {
           </div>
         </div>
       </section>
+
+      <AnnouncementCard />
 
       {/* LOGO STRIP */}
       <section className="logo-strip">
