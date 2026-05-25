@@ -54,7 +54,7 @@ button { font: inherit; cursor: pointer; border: 0; background: transparent; col
 .nav-cta { display: inline-flex; align-items: center; gap: 10px; padding: 10px 22px; border-radius: 100px; background: var(--rust); color: #fff; font-size: 12px; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase; transition: background-color 0.3s; }
 .nav-cta:hover { background: var(--rust-deep); }
 @media (max-width: 900px) { .nav-links { display: none; } }
-.hero-panel { display: flex; }
+.hero-panel { display: block; }
 @media (max-width: 1100px) { .hero-panel { display: none !important; } }
 .hero { background: var(--forest-deep); color: var(--ivory); position: relative; overflow: hidden; min-height: 78vh; margin-top: -88px; padding-top: 88px; display: flex; flex-direction: column; }
 .hero-stage { flex: 1; position: relative; display: flex; align-items: center; }
