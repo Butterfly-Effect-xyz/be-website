@@ -3,10 +3,10 @@ import { useState } from "react"
 import Link from "next/link"
 
 const SERVICES = [
-  { i: 1, title: "Brand", body: "Strategy, identity, narrative. We\'re the architects behind the scenes, designing blueprints to guide brands through the ever-changing digital terrain.", cta: "View brand work", href: "/work?cat=brand" },
-  { i: 2, title: "Influencer", body: "The bridge between audiences and brands. We immerse ourselves in communities, absorb culture, and identify the talent that shapes narratives.", cta: "View influencer work", href: "/work?cat=influencer" },
-  { i: 3, title: "Creative", body: "We breathe life into brands, moulding ideas into unforgettable moments. We don\'t create for the sake of it — we work backwards from the endgame.", cta: "View creative work", href: "/work?cat=creative" },
-  { i: 4, title: "Social", body: "It\'s not about posting pretty pictures. It\'s about leveraging insights and data to build communities, drive conversation, and deliver tangible ROI.", cta: "View social work", href: "/work?cat=social" },
+  { i: 1, bg: "#506054", title: "Brand", body: "Strategy, identity, narrative. We\'re the architects behind the scenes, designing blueprints to guide brands through the ever-changing digital terrain.", cta: "View brand work", href: "/work?cat=brand" },
+  { i: 2, bg: "#341c12", title: "Influencer", body: "The bridge between audiences and brands. We immerse ourselves in communities, absorb culture, and identify the talent that shapes narratives.", cta: "View influencer work", href: "/work?cat=influencer" },
+  { i: 3, bg: "#611e1f", title: "Creative", body: "We breathe life into brands, moulding ideas into unforgettable moments. We don\'t create for the sake of it — we work backwards from the endgame.", cta: "View creative work", href: "/work?cat=creative" },
+  { i: 4, bg: "#afc1cb", title: "Social", body: "It\'s not about posting pretty pictures. It\'s about leveraging insights and data to build communities, drive conversation, and deliver tangible ROI.", cta: "View social work", href: "/work?cat=social" },
 ]
 
 export default function Services() {
@@ -55,7 +55,7 @@ export default function Services() {
                 }}
               >
                 {/* Number */}
-                <span style={{fontFamily:"var(--mono)",fontSize:12,letterSpacing:"0.22em",textTransform:"uppercase",opacity:0.55}}>0{s.i}</span>
+                <span style={{fontFamily:"var(--mono)",fontSize:12,letterSpacing:"0.22em",textTransform:"uppercase",opacity:0.55,color:"#fff"}}>0{s.i}</span>
 
                 {/* Spine - vertical title, shown when collapsed */}
                 <div style={{
