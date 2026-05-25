@@ -144,8 +144,8 @@ export default async function HomePage() {
           ))}
         </div>
 
-        {/* RIGHT PANEL — notices + companies */}
-        <div className="hero-panel" style={{position:'absolute',top:'50%',right:32,transform:'translateY(-50%)',width:300,zIndex:10,display:'flex',flexDirection:'column',gap:10}}>
+        {/* RIGHT PANEL — notices */}
+        <div className="hero-panel" style={{position:'absolute',top:'50%',right:80,transform:'translateY(-50%)',width:360,zIndex:10,display:'flex',flexDirection:'column',gap:10}}>
 
           {/* What's new */}
           {annBlocks.length > 0 && (
@@ -163,16 +163,6 @@ export default async function HomePage() {
             </div>
           )}
 
-          {/* Companies */}
-          <div style={{background:'rgba(255,255,255,0.04)',border:'1px solid rgba(255,255,255,0.08)',borderRadius:14,padding:'14px 16px',backdropFilter:'blur(16px)',WebkitBackdropFilter:'blur(16px)'}}>
-            <span style={{fontFamily:'var(--mono)',fontSize:9,fontWeight:700,letterSpacing:'0.38em',textTransform:'uppercase',color:'rgba(255,255,255,0.32)',display:'block',marginBottom:12}}>Who we&apos;ve worked with</span>
-            <div style={{display:'flex',flexWrap:'wrap',gap:'7px 10px'}}>
-              {LOGOS.map(logo => (
-                <span key={logo} style={{fontFamily:'var(--sans)',fontSize:10,fontWeight:700,letterSpacing:'0.06em',color:'rgba(255,255,255,0.38)',whiteSpace:'nowrap'}}>{logo}</span>
-              ))}
-            </div>
-          </div>
-
         </div>
         <div className="hero-foot" style={{position:'relative',zIndex:2}}>
           <div className="hero-dots" id="hero-dots">
@@ -180,6 +170,13 @@ export default async function HomePage() {
               <button key={i} className={`hero-dot${i === 0 ? ' is-active' : ''}`} aria-label={`Slide ${i+1}`} />
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* LOGO STRIP */}
+      <section className="logo-strip">
+        <div className="logo-strip-track">
+          {[...LOGOS,...LOGOS].map((name,i) => <span key={i} className="logo-strip-item">{name}</span>)}
         </div>
       </section>
 
