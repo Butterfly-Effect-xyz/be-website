@@ -57,16 +57,19 @@ export default function QuickNav() {
 
       {/* Modal */}
       <div style={{
-        position: 'fixed',
-        bottom: open ? 32 : -600,
-        right: 32,
-        zIndex: 1001,
-        width: 'min(480px, calc(100vw - 48px))',
-        background: '#fff',
-        borderRadius: 20,
-        padding: '32px 32px 24px',
-        boxShadow: '0 24px 80px rgba(0,0,0,0.2)',
-        transition: 'bottom 0.4s cubic-bezier(0.16,1,0.3,1)',
+        position:       'fixed',
+        bottom:         open ? 32 : 32,
+        right:          32,
+        zIndex:         1001,
+        width:          'min(480px, calc(100vw - 48px))',
+        background:     '#fff',
+        borderRadius:   20,
+        padding:        '32px 32px 24px',
+        boxShadow:      '0 24px 80px rgba(0,0,0,0.2)',
+        transform:      open ? 'translateY(0)' : 'translateY(calc(100% + 48px))',
+        opacity:        open ? 1 : 0,
+        pointerEvents:  open ? 'auto' : 'none',
+        transition:     'transform 0.4s cubic-bezier(0.16,1,0.3,1), opacity 0.3s ease',
       }}>
         {/* Header */}
         <div style={{display:'flex',alignItems:'flex-start',justifyContent:'space-between',marginBottom:32}}>

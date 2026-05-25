@@ -21,19 +21,28 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <div className="nav-inner">
             <a href="/" className="nav-logo">Butterfly Effect</a>
             <div className="nav-links">
-              <a href="/work" className="nav-link">Our Work</a>
-              <a href="/mission" className="nav-link">Our Mission</a>
-              <a href="/mission/team" className="nav-link">Our Team</a>
-              <a href="/mission/careers" className="nav-link">Butterfly Effect Careers</a>
-              <a href="/insights" className="nav-link">Free Sauce</a>
-              <a href="/catalyst" className="nav-link" style={{display:'inline-flex',alignItems:'center',gap:6}}>
-                Catalyst
-                <span style={{fontFamily:'var(--mono)',fontSize:8,fontWeight:700,letterSpacing:'0.18em',textTransform:'uppercase',background:'rgba(181,69,42,0.14)',color:'#b5452a',padding:'2px 7px',borderRadius:100,lineHeight:1.6}}>Soon</span>
-              </a>
+              <div className="nav-drop">
+                <a href="/mission" className="nav-link">Mission <svg className="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M6 9l6 6 6-6"/></svg></a>
+                <div className="nav-drop-panel">
+                  <a href="/mission/story">Our Story</a>
+                  <a href="/mission/team">Team</a>
+                  <a href="/mission/careers">Careers</a>
+                </div>
+              </div>
+              <a href="/work" className="nav-link">Work</a>
+              <div className="nav-drop">
+                <a href="/insights" className="nav-link">Insights <svg className="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M6 9l6 6 6-6"/></svg></a>
+                <div className="nav-drop-panel">
+                  <a href="/insights">All</a>
+                  <a href="/insights?cat=podcast">Podcasts</a>
+                  <a href="/insights?cat=article">Articles</a>
+                </div>
+              </div>
+              <a href="/catalyst" className="nav-link">Catalyst</a>
             </div>
             <MobileNav />
             <a href="/contact" className="nav-cta">
-              Get in Contact
+              Let&apos;s talk
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" style={{width:16,height:16}}><path d="M5 12h14M13 5l7 7-7 7"/></svg>
             </a>
           </div>
@@ -49,13 +58,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               <div>
                 <p className="footer-col-label">Navigate</p>
                 <ul className="footer-links">
-                  <li><a href="/work">Our Work</a></li>
-                  <li><a href="/mission">Our Mission</a></li>
-                  <li><a href="/mission/team">Our Team</a></li>
-                  <li><a href="/mission/careers">Butterfly Effect Careers</a></li>
-                  <li><a href="/insights">Free Sauce</a></li>
-                  <li><a href="/catalyst">Catalyst</a></li>
-                  <li><a href="/contact">Get in Contact</a></li>
+                  {['Work','Mission','Insights','Catalyst','Contact'].map(item => (
+                    <li key={item}><a href={`/${item.toLowerCase()}`}>{item}</a></li>
+                  ))}
                 </ul>
               </div>
               <div>
