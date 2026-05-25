@@ -24,8 +24,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 <a href="/mission" className="nav-link">Mission <svg className="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M6 9l6 6 6-6"/></svg></a>
                 <div className="nav-drop-panel">
                   <a href="/mission/story">Our Story</a>
-                  <a href="/mission#team">Team</a>
-                  <a href="/mission#careers">Careers</a>
+                  <a href="/mission/team">Team</a>
+                  <a href="/mission/careers">Careers</a>
                 </div>
               </div>
               <a href="/work" className="nav-link">Work</a>
