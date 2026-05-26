@@ -93,6 +93,13 @@ export default async function HomePage() {
         {/* scrim so logo/line will be readable when added */}
         <div className="hero-video-scrim" />
         {/* logo and headline coming soon */}
+
+        {/* Scroll indicator */}
+        <a href="#hero" className="splash-scroll-arrow" aria-label="Scroll down">
+          <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M6 9l6 6 6-6"/>
+          </svg>
+        </a>
       </section>
 
       {/* HERO */}
