@@ -106,7 +106,7 @@ export default async function HomePage() {
       </section>
 
       {/* HERO */}
-      <section className="hero" id="hero" style={{position:'relative',overflow:'hidden',minHeight:'78vh',marginTop:0,paddingTop:80}}>
+      <section className="hero" id="hero" style={{position:'relative',zIndex:1,overflow:'hidden',minHeight:'78vh',marginTop:0,paddingTop:80}}>
         {/* Brand gradient background */}
         <div style={{
           position:'absolute',

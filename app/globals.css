@@ -215,7 +215,9 @@ button { font: inherit; cursor: pointer; border: 0; background: transparent; col
 /* ---- Splash section (full-screen video above hero) ---- */
 .splash-section {
   height: 100vh;
-  position: relative;
+  position: sticky;
+  top: 0;
+  z-index: 0;
   overflow: hidden;
   display: flex;
   flex-direction: column;
