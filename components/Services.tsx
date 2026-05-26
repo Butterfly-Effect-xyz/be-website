@@ -89,7 +89,7 @@ export default function Services() {
                   transition:"opacity 0.5s 0.1s ease, transform 0.5s 0.1s ease",
                 }}>
                   <h3 style={{fontFamily:"var(--display)",fontWeight:800,fontSize:"clamp(28px,3vw,44px)",letterSpacing:"-0.025em",margin:"0 0 16px",color:"#fff"}}>{s.title}</h3>
-                  <p style={{fontSize:16,lineHeight:1.55,maxWidth:"38ch",color:"rgba(155,167,129,0.85)",margin:0}}>{s.body}</p>
+                  <p style={{fontSize:16,lineHeight:1.55,maxWidth:"38ch",color:"rgba(255,255,255,0.78)",margin:0}}>{s.body}</p>
                 </div>
 
                 {/* Footer link - shown when open */}
@@ -150,7 +150,7 @@ export default function Services() {
                   opacity: isOpen ? 1 : 0,
                   transition:"max-height 0.5s ease, opacity 0.4s ease",
                 }}>
-                  <p style={{fontSize:15,lineHeight:1.65,color:"rgba(155,167,129,0.9)",margin:"16px 0 20px",maxWidth:"40ch"}}>{s.body}</p>
+                  <p style={{fontSize:15,lineHeight:1.65,color:"rgba(255,255,255,0.78)",margin:"16px 0 20px",maxWidth:"40ch"}}>{s.body}</p>
                   <Link
                     href={s.href}
                     onClick={e => e.stopPropagation()}
