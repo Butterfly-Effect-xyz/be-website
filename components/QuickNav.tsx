@@ -14,7 +14,7 @@ const NAV_ITEMS = [
 ]
 
 export default function QuickNav() {
-  const [open, setOpen] = useState(false)
+  const [open, setOpen] = useState(true)
 
   return (
     <>
