@@ -267,8 +267,8 @@ export default async function HomePage() {
               <h2 className="t-h2">Who we are</h2>
             </div>
             <div className="crew-arrows">
-              <button className="crew-arrow" id="crew-prev" aria-label="Previous"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6"><path d="M15 18l-6-6 6-6"/></svg></button>
-              <button className="crew-arrow" id="crew-next" aria-label="Next"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6"><path d="M9 6l6 6-6 6"/></svg></button>
+              <button className="crew-arrow" id="crew-prev" aria-label="Previous"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" style={{width:16,height:16}}><path d="M15 18l-6-6 6-6"/></svg></button>
+              <button className="crew-arrow" id="crew-next" aria-label="Next"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" style={{width:16,height:16}}><path d="M9 6l6 6-6 6"/></svg></button>
             </div>
           </div>
           <div className="crew-track-wrap">
