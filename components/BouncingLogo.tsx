@@ -15,9 +15,9 @@ const COLOURS = [
   "invert(1) sepia(1) saturate(15) hue-rotate(330deg)",            // pink
 ]
 
-const SIZE  = 96   // logo size in px
-const VX    = 1.5  // horizontal speed (px/frame at 60fps — DVD pace)
-const VY    = 1.1  // different from VX so it never perfectly repeats a path
+const SIZE  = 192  // logo size in px
+const VX    = 3.0  // horizontal speed (px/frame at 60fps)
+const VY    = 2.2  // different from VX so it never perfectly repeats a path
 
 export default function BouncingLogo() {
   const imgRef = useRef<HTMLImageElement>(null)
