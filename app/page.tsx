@@ -5,6 +5,7 @@ import { heroSlidesQuery, testimonialsQuery, teamMembersQuery, featuredCaseStudi
 import Link from 'next/link'
 import Services from '@/components/Services'
 import HeroNotice from '@/components/HeroNotice'
+import BouncingLogo from '@/components/BouncingLogo'
 
 // Minimal portable-text renderer (bold, italic, links)
 function renderBlock(block: any) {
@@ -92,7 +93,9 @@ export default async function HomePage() {
         </video>
         {/* scrim so logo/line will be readable when added */}
         <div className="hero-video-scrim" />
-        {/* logo and headline coming soon */}
+
+        {/* Bouncing logo */}
+        <BouncingLogo />
 
         {/* Scroll indicator */}
         <a href="#hero" className="splash-scroll-arrow" aria-label="Scroll down">
