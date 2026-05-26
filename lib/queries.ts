@@ -16,6 +16,6 @@ export const articlesQuery = `*[_type == "article"] | order(publishedAt desc) { 
 
 export const missionPageQuery = `*[_type == "missionPage"][0] { headline, subheadline, body, manifesto, values[] { title, description } }`
 
-export const catalystConfigQuery = `*[_type == "catalystConfiguration"][0] { headline, subheadline, description, ctaLabel, ctaHref }`
+export const catalystConfigQuery = `*[_type == "catalystConfiguration"][0] { headline, subheadline, description, ctaLabel, ctaHref, "mainPhotoUrl": mainPhoto.asset->url, "momentPhotoUrls": momentPhotos[].asset->url }`
 
 export const catalystEventsQuery = `*[_type == "catalystEvent"] | order(date asc) { _id, title, date, location, description, image }`

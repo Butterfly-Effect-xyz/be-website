@@ -27,8 +27,12 @@ const PHOTO_WIDTHS = [280, 340, 260, 320, 290]
 export default async function CatalystPage() {
   const { config } = await getData()
 
-  const headline    = config?.headline    || 'Conversations that shape culture'
-  const description = config?.description || 'Catalyst brings together founders, creatives, and strategists for intimate evenings of candid dialogue. No panels. No pitches. Just the conversations that matter.'
+  const headline        = config?.headline        || 'Conversations that shape culture'
+  const description     = config?.description     || 'Catalyst brings together founders, creatives, and strategists for intimate evenings of candid dialogue. No panels. No pitches. Just the conversations that matter.'
+  const mainPhotoUrl    = config?.mainPhotoUrl    || null
+  const momentPhotoUrls: (string | null)[] = config?.momentPhotoUrls?.length
+    ? config.momentPhotoUrls
+    : [null, null, null, null, null]
 
   return (
     <main data-hero-dark="1">
@@ -183,22 +187,33 @@ export default async function CatalystPage() {
         {/* Split row */}
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr' }}>
 
-          {/* Image placeholder */}
-          <div style={{
-            minHeight:       480,
-            background:      'linear-gradient(145deg,#c5bdb5 0%,#a89f96 100%)',
-            display:         'flex',
-            alignItems:      'center',
-            justifyContent:  'center',
-          }}>
-            <span style={{
-              fontFamily:    'var(--mono)',
-              fontSize:      10,
-              letterSpacing: '0.24em',
-              textTransform: 'uppercase',
-              color:         'rgba(255,255,255,0.4)',
-            }}>Photo</span>
-          </div>
+          {/* Main photo */}
+          {mainPhotoUrl ? (
+            <div style={{ minHeight: 480, overflow: 'hidden' }}>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={mainPhotoUrl}
+                alt="Catalyst event"
+                style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+              />
+            </div>
+          ) : (
+            <div style={{
+              minHeight:      480,
+              background:     'linear-gradient(145deg,#c5bdb5 0%,#a89f96 100%)',
+              display:        'flex',
+              alignItems:     'center',
+              justifyContent: 'center',
+            }}>
+              <span style={{
+                fontFamily:    'var(--mono)',
+                fontSize:      10,
+                letterSpacing: '0.24em',
+                textTransform: 'uppercase',
+                color:         'rgba(255,255,255,0.4)',
+              }}>Photo</span>
+            </div>
+          )}
 
           {/* Copy */}
           <div style={{
@@ -311,24 +326,37 @@ export default async function CatalystPage() {
           overflowX:     'auto',
           scrollbarWidth:'none',
         }}>
-          {PHOTO_WIDTHS.map((w, i) => (
-            <div key={i} style={{
-              flex:            `0 0 ${w}px`,
-              height:          290,
-              background:      `hsl(${22 + i * 6},${10 + i * 2}%,${68 + i * 4}%)`,
-              display:         'flex',
-              alignItems:      'center',
-              justifyContent:  'center',
-            }}>
-              <span style={{
-                fontFamily:    'var(--mono)',
-                fontSize:      10,
-                letterSpacing: '0.2em',
-                textTransform: 'uppercase',
-                color:         'rgba(255,255,255,0.35)',
-              }}>Photo {i + 1}</span>
-            </div>
-          ))}
+          {PHOTO_WIDTHS.map((w, i) => {
+            const url = momentPhotoUrls[i] || null
+            return url ? (
+              <div key={i} style={{ flex: `0 0 ${w}px`, height: 290, overflow: 'hidden', flexShrink: 0 }}>
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={url}
+                  alt={`Catalyst moment ${i + 1}`}
+                  style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+                />
+              </div>
+            ) : (
+              <div key={i} style={{
+                flex:           `0 0 ${w}px`,
+                height:         290,
+                background:     `hsl(${22 + i * 6},${10 + i * 2}%,${68 + i * 4}%)`,
+                display:        'flex',
+                alignItems:     'center',
+                justifyContent: 'center',
+                flexShrink:     0,
+              }}>
+                <span style={{
+                  fontFamily:    'var(--mono)',
+                  fontSize:      10,
+                  letterSpacing: '0.2em',
+                  textTransform: 'uppercase',
+                  color:         'rgba(255,255,255,0.35)',
+                }}>Photo {i + 1}</span>
+              </div>
+            )
+          })}
         </div>
 
         {/* Gallery link */}
