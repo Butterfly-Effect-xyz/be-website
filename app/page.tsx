@@ -86,7 +86,7 @@ export default async function HomePage() {
           loop
           playsInline
           poster="/video/hero-poster.jpg"
-          preload="metadata"
+          preload="auto"
           className="hero-video"
         >
           <source src="/video/hero.mp4" type="video/mp4" />
