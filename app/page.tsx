@@ -183,6 +183,9 @@ export default async function HomePage() {
         </div>
       </section>
 
+      {/* All sections below sit above the sticky video splash */}
+      <div style={{position:'relative',zIndex:1,background:'#fff'}}>
+
       {/* LOGO STRIP */}
       <section className="logo-strip">
         <div className="logo-strip-track">
@@ -354,6 +357,8 @@ export default async function HomePage() {
         document.getElementById('crew-next').addEventListener('click', () => track.scrollBy({left:244,behavior:'smooth'}));
         track.style.overflowX = 'auto'; track.style.scrollbarWidth = 'none';
       `}} />
+
+      </div>{/* end above-splash wrapper */}
     </main>
   )
 }
