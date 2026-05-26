@@ -9,7 +9,7 @@ export default function ContactPage() {
         </div>
       </section>
       <section className="container" style={{paddingBottom:160}}>
-        <div style={{display:'grid',gridTemplateColumns:'repeat(3,1fr)',gap:'clamp(20px,2vw,32px)'}}>
+        <div className="contact-cards-grid">
           {[
             { title:'New business', desc:'Ready to work together? Tell us about your brand and goals.', cta:'Send a brief', href:'mailto:hello@butterflyeffect.xyz' },
             { title:'Press & media', desc:'For press enquiries, interviews and media requests.', cta:'Get in touch', href:'mailto:press@butterflyeffect.xyz' },

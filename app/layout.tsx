@@ -17,7 +17,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Mona+Sans:ital,wght@0,200..900;1,200..900&family=JetBrains+Mono:wght@400;500&family=Montserrat:wght@400;500;600;700&display=swap" />
       </head>
       <body>
-        <nav className="nav on-dark" id="site-nav">
+        <nav className="nav" id="site-nav">
           <div className="nav-inner">
             <a href="/" className="nav-logo">Butterfly Effect</a>
             <div className="nav-links">
@@ -80,11 +80,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <QuickNav />
         <script dangerouslySetInnerHTML={{__html: `
           const nav = document.getElementById('site-nav');
-          let dark = document.body.dataset.heroDark === '1';
-          if(dark) nav.classList.add('on-dark');
+          const heroDark = document.querySelector('main')?.dataset?.heroDark === '1';
+          if(heroDark) nav.classList.add('on-dark');
           window.addEventListener('scroll', () => {
             if(window.scrollY > 40) { nav.classList.add('scrolled'); nav.classList.remove('on-dark'); }
-            else { nav.classList.remove('scrolled'); if(dark) nav.classList.add('on-dark'); }
+            else { nav.classList.remove('scrolled'); if(heroDark) nav.classList.add('on-dark'); }
           });
         `}} />
       </body>

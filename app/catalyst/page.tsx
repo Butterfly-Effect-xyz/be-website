@@ -31,7 +31,7 @@ export default async function CatalystPage() {
   const description = config?.description || 'Catalyst brings together founders, creatives, and strategists for intimate evenings of candid dialogue. No panels. No pitches. Just the conversations that matter.'
 
   return (
-    <main>
+    <main data-hero-dark="1">
       <style>{`
         .catalyst-input::placeholder { color: rgba(255,255,255,0.45); }
         .catalyst-input { color: #fff; }

@@ -210,3 +210,60 @@ button { font: inherit; cursor: pointer; border: 0; background: transparent; col
 .ins-thumb-play { transition: transform 0.3s var(--ease-out), background-color 0.25s; }
 @media (max-width: 900px) { .mobile-menu-btn { display: flex !important; } .nav-cta { display: none; } }
 @media (min-width: 901px) { .mobile-menu-btn { display: none !important; } }
+
+/* ---- Splash section (full-screen white above hero) ---- */
+.splash-section {
+  height: 100vh;
+  background: #ffffff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+/* ---- Hero background video ---- */
+.hero-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+  pointer-events: none;
+}
+.hero-video-scrim {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.48);
+  z-index: 1;
+  pointer-events: none;
+}
+/* Hide video on mobile — gradient fallback is used instead */
+@media (max-width: 768px) {
+  .hero-video { display: none; }
+  .hero-video-scrim { display: none; }
+}
+
+/* ---- Services: mobile accordion ---- */
+.svc-container { max-width: 1280px; margin: 0 auto; padding: 0 40px; }
+.svc-mobile-accordion { display: none; }
+@media (max-width: 768px) {
+  .svc-container { padding: 0 24px; }
+  .svc-desktop-grid { display: none !important; }
+  .svc-mobile-accordion { display: block; }
+}
+
+/* ---- Insights: responsive grid ---- */
+.ins-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(36px,4vw,72px) clamp(24px,3vw,48px); }
+.ins-page-inner { max-width: 1280px; margin: 0 auto; padding: 0 40px; }
+@media (max-width: 768px) {
+  .ins-grid { grid-template-columns: 1fr !important; gap: 48px !important; }
+  .ins-page-inner { padding: 0 24px !important; }
+}
+
+/* ---- Contact: responsive cards ---- */
+.contact-cards-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(20px,2vw,32px); }
+@media (max-width: 768px) {
+  .contact-cards-grid { grid-template-columns: 1fr !important; }
+}

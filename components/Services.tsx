@@ -11,6 +11,7 @@ const SERVICES = [
 
 export default function Services() {
   const [open, setOpen] = useState(1)
+  const [mobileOpen, setMobileOpen] = useState<number | null>(1)
 
   const gridCols = {
     1: "1fr 0.42fr 0.42fr 0.42fr",
@@ -21,12 +22,14 @@ export default function Services() {
 
   return (
     <section style={{padding:"80px 0"}}>
-      <div style={{maxWidth:1280,margin:"0 auto",padding:"0 40px"}}>
+      <div className="svc-container">
         <div style={{marginBottom:56}}>
           <span style={{fontFamily:"var(--mono)",fontSize:11,fontWeight:500,letterSpacing:"0.28em",textTransform:"uppercase",color:"rgba(0,0,0,0.4)",display:"block",marginBottom:12}}>What we do</span>
           <h2 style={{fontFamily:"var(--display)",fontWeight:800,fontSize:"clamp(34px,4.4vw,72px)",lineHeight:1.02,letterSpacing:"-0.025em",margin:0}}>Services</h2>
         </div>
-        <div style={{
+
+        {/* Desktop: horizontal expanding grid */}
+        <div className="svc-desktop-grid" style={{
           display:"grid",
           gridTemplateColumns:gridCols,
           transition:"grid-template-columns 0.7s cubic-bezier(0.22,1,0.36,1)",
@@ -107,6 +110,60 @@ export default function Services() {
                   {s.cta}
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" style={{width:16,height:16}}><path d="M5 12h14M13 5l7 7-7 7"/></svg>
                 </Link>
+              </div>
+            )
+          })}
+        </div>
+
+        {/* Mobile: stacked accordion */}
+        <div className="svc-mobile-accordion" style={{borderTop:"1px solid rgba(0,0,0,0.10)"}}>
+          {SERVICES.map(s => {
+            const isOpen = mobileOpen === s.i
+            return (
+              <div
+                key={s.i}
+                onClick={() => setMobileOpen(isOpen ? null : s.i)}
+                style={{
+                  background: isOpen ? "#000" : "#fff",
+                  color: isOpen ? "#fff" : "#000",
+                  borderBottom:"1px solid rgba(0,0,0,0.10)",
+                  padding:"22px 0",
+                  cursor:"pointer",
+                  transition:"background 0.4s ease, color 0.4s ease",
+                }}
+              >
+                {/* Row: number + title + chevron */}
+                <div style={{display:"flex",alignItems:"center",justifyContent:"space-between"}}>
+                  <div style={{display:"flex",alignItems:"center",gap:16}}>
+                    <span style={{fontFamily:"var(--mono)",fontSize:11,letterSpacing:"0.22em",opacity:0.5,flexShrink:0,color: isOpen ? "rgba(255,255,255,0.5)" : "rgba(0,0,0,0.4)"}}>0{s.i}</span>
+                    <span style={{fontFamily:"var(--display)",fontWeight:800,fontSize:22,letterSpacing:"-0.01em"}}>{s.title}</span>
+                  </div>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"
+                    style={{width:18,height:18,flexShrink:0,transform: isOpen ? "rotate(180deg)" : "none",transition:"transform 0.3s ease"}}>
+                    <path d="M6 9l6 6 6-6"/>
+                  </svg>
+                </div>
+                {/* Expandable body */}
+                <div style={{
+                  overflow:"hidden",
+                  maxHeight: isOpen ? 320 : 0,
+                  opacity: isOpen ? 1 : 0,
+                  transition:"max-height 0.5s ease, opacity 0.4s ease",
+                }}>
+                  <p style={{fontSize:15,lineHeight:1.65,color:"rgba(155,167,129,0.9)",margin:"16px 0 20px",maxWidth:"40ch"}}>{s.body}</p>
+                  <Link
+                    href={s.href}
+                    onClick={e => e.stopPropagation()}
+                    style={{
+                      display:"inline-flex",alignItems:"center",gap:10,
+                      fontSize:11,fontWeight:600,letterSpacing:"0.24em",textTransform:"uppercase",
+                      color:"#9ba781",textDecoration:"none",marginBottom:4,
+                    }}
+                  >
+                    {s.cta}
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" style={{width:14,height:14}}><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+                  </Link>
+                </div>
               </div>
             )
           })}

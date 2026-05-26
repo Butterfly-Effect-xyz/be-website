@@ -30,7 +30,7 @@ export default function InsightsPage() {
   return (
     <main>
       <section style={{padding:"120px 0 48px"}}>
-        <div style={{maxWidth:1280,margin:"0 auto",padding:"0 40px"}}>
+        <div className="ins-page-inner">
           <span style={{fontFamily:"var(--mono)",fontSize:11,fontWeight:500,letterSpacing:"0.28em",textTransform:"uppercase",color:"rgba(0,0,0,0.4)",display:"block",marginBottom:16}}>— 04 / INSIGHTS</span>
           <h1 style={{fontFamily:"var(--display)",fontWeight:800,fontSize:"clamp(56px,8vw,110px)",lineHeight:0.96,letterSpacing:"-0.035em",margin:"0 0 48px"}}>Notes from<br/>the studio.</h1>
           <div style={{display:"flex",gap:32,borderBottom:"1px solid rgba(0,0,0,0.1)",paddingBottom:0}}>
@@ -41,8 +41,8 @@ export default function InsightsPage() {
       </section>
 
       <section id="podcasts" style={{padding:"64px 0 96px"}}>
-        <div style={{maxWidth:1280,margin:"0 auto",padding:"0 40px"}}>
-          <div style={{display:"grid",gridTemplateColumns:"repeat(3,minmax(0,1fr))",gap:"clamp(36px,4vw,72px) clamp(24px,3vw,48px)"}}>
+        <div className="ins-page-inner">
+          <div className="ins-grid">
             {PODCASTS.map((item, i) => {
               const thumb = "https://i.ytimg.com/vi/" + item.videoId + "/maxresdefault.jpg"
               const thumb2 = "https://i.ytimg.com/vi/" + item.videoId + "/hqdefault.jpg"
@@ -71,12 +71,12 @@ export default function InsightsPage() {
       </section>
 
       <section id="articles" style={{padding:"80px 0",background:"#f4f4f4",textAlign:"center"}}>
-        <div style={{maxWidth:1280,margin:"0 auto",padding:"0 40px"}}>
+        <div className="ins-page-inner">
           <p style={{fontFamily:"var(--display)",fontWeight:800,fontSize:"clamp(28px,3vw,48px)",letterSpacing:"-0.02em",margin:0,color:"#000"}}>Loads of free smoke to come...</p>
         </div>
       </section>
 
-      <section style={{background:"#000",color:"#fff",padding:"100px 40px",textAlign:"center"}}>
+      <section style={{background:"#000",color:"#fff",padding:"100px 24px",textAlign:"center"}}>
         <div style={{maxWidth:1280,margin:"0 auto"}}>
           <h2 style={{fontFamily:"var(--display)",fontWeight:800,fontSize:"clamp(40px,6vw,80px)",lineHeight:0.96,letterSpacing:"-0.035em",margin:"0 0 48px"}}>Ready to seize<br/>the void?</h2>
           <div style={{display:"flex",alignItems:"center",justifyContent:"center",gap:16,flexWrap:"wrap"}}>
