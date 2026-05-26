@@ -225,7 +225,7 @@ button { font: inherit; cursor: pointer; border: 0; background: transparent; col
 }
 .splash-scroll-arrow {
   position: absolute;
-  bottom: 44px;
+  bottom: 80px;
   left: 50%;
   transform: translateX(-50%);
   z-index: 3;
