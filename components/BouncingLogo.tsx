@@ -32,6 +32,8 @@ export default function BouncingLogo() {
     let colourIdx = 0
     let raf: number
 
+    const el: HTMLImageElement = img
+
     function tick() {
       const cw = container.clientWidth
       const ch = container.clientHeight
@@ -47,10 +49,10 @@ export default function BouncingLogo() {
 
       if (bounced) {
         colourIdx = (colourIdx + 1) % COLOURS.length
-        img.style.filter = COLOURS[colourIdx]
+        el.style.filter = COLOURS[colourIdx]
       }
 
-      img.style.transform = `translate(${x}px, ${y}px)`
+      el.style.transform = `translate(${x}px, ${y}px)`
       raf = requestAnimationFrame(tick)
     }
 
