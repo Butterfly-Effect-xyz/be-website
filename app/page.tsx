@@ -77,14 +77,8 @@ export default async function HomePage() {
 
   return (
     <main>
-      {/* SPLASH — full-screen white section above the hero */}
+      {/* SPLASH — full-screen video section above the hero */}
       <section className="splash-section">
-        {/* logo and headline coming soon */}
-      </section>
-
-      {/* HERO */}
-      <section className="hero" id="hero" style={{position:'relative',overflow:'hidden',minHeight:'78vh',marginTop:0,paddingTop:80}}>
-        {/* Background video — hidden on mobile via CSS */}
         <video
           autoPlay
           muted
@@ -96,17 +90,59 @@ export default async function HomePage() {
         >
           <source src="/video/hero.mp4" type="video/mp4" />
         </video>
-
-        {/* Dark scrim over video so text stays legible */}
+        {/* scrim so logo/line will be readable when added */}
         <div className="hero-video-scrim" />
+        {/* logo and headline coming soon */}
+      </section>
 
-        {/* Colour overlays — kept so gradient treatment still shows on mobile fallback */}
+      {/* HERO */}
+      <section className="hero" id="hero" style={{position:'relative',overflow:'hidden',minHeight:'78vh',marginTop:0,paddingTop:80}}>
+        {/* Brand gradient background */}
         <div style={{
           position:'absolute',
           inset:0,
-          background:'linear-gradient(135deg, rgba(0,0,0,0.55) 0%, rgba(22,30,27,0.35) 40%, rgba(52,28,18,0.3) 70%, rgba(0,0,0,0.55) 100%)',
+          background:'linear-gradient(135deg, #000000 0%, #161e1b 30%, #341c12 60%, #1a0f0f 85%, #000000 100%)',
           pointerEvents:'none',
-          zIndex:1,
+          zIndex:0,
+        }} />
+        {/* Moss orb top right */}
+        <div style={{
+          position:'absolute',
+          top:'-10%',
+          right:'15%',
+          width:'min(500px,45vw)',
+          height:'min(500px,45vw)',
+          borderRadius:'50%',
+          background:'radial-gradient(circle, rgba(80,96,84,0.45) 0%, rgba(22,30,27,0.2) 50%, transparent 75%)',
+          pointerEvents:'none',
+          zIndex:0,
+          filter:'blur(60px)',
+        }} />
+        {/* Earth orb bottom left */}
+        <div style={{
+          position:'absolute',
+          bottom:'-5%',
+          left:'5%',
+          width:'min(400px,35vw)',
+          height:'min(400px,35vw)',
+          borderRadius:'50%',
+          background:'radial-gradient(circle, rgba(52,28,18,0.7) 0%, rgba(43,65,65,0.3) 50%, transparent 75%)',
+          pointerEvents:'none',
+          zIndex:0,
+          filter:'blur(50px)',
+        }} />
+        {/* Rust accent */}
+        <div style={{
+          position:'absolute',
+          top:'30%',
+          right:'35%',
+          width:'min(200px,18vw)',
+          height:'min(200px,18vw)',
+          borderRadius:'50%',
+          background:'radial-gradient(circle, rgba(97,30,31,0.35) 0%, transparent 70%)',
+          pointerEvents:'none',
+          zIndex:0,
+          filter:'blur(40px)',
         }} />
 
         <div className="hero-stage" id="hero-stage" style={{position:'relative',zIndex:3,display:'flex',alignItems:'center'}}>

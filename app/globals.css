@@ -211,15 +211,16 @@ button { font: inherit; cursor: pointer; border: 0; background: transparent; col
 @media (max-width: 900px) { .mobile-menu-btn { display: flex !important; } .nav-cta { display: none; } }
 @media (min-width: 901px) { .mobile-menu-btn { display: none !important; } }
 
-/* ---- Splash section (full-screen white above hero) ---- */
+/* ---- Splash section (full-screen video above hero) ---- */
 .splash-section {
   height: 100vh;
-  background: #ffffff;
+  position: relative;
+  overflow: hidden;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  position: relative;
+  background: #000;
 }
 
 /* ---- Hero background video ---- */
