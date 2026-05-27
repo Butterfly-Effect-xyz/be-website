@@ -21,6 +21,7 @@ const TABS = [
     id: "culture",
     label: "Our People & Culture",
     heading: "Our People & Culture",
+    image: "/images/careers-culture.jpg",
     body: "At Butterfly Effect, our secret sauce is not just our strategy alone — it is the people who make it happen. We are a lively bunch of creatives, thinkers, doers, and culture-spotters who love a good challenge and bringing it to life. Expect a mix of focused deep work, lots of spontaneity, and working closely as a global team. We celebrate diversity of people and thought, champion curiosity, and cheer each other on — because great ideas come from great people feeling free to be themselves.",
   },
   {
@@ -70,21 +71,17 @@ export default function CareersPage() {
               </button>
             ))}
           </div>
-          <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:80,alignItems:"center"}}>
-            <div style={{aspectRatio:"4/3",borderRadius:2,overflow:"hidden",background:"#f0f0f0",flexShrink:0}}>
-              {(tab as any).image ? (
-                // eslint-disable-next-line @next/next/no-img-element
+          <div style={{display:"grid",gridTemplateColumns:(tab as any).image ? "1fr 1fr" : "1fr",gap:80,alignItems:"center",maxWidth:(tab as any).image ? "none" : 640}}>
+            {(tab as any).image && (
+              <div style={{aspectRatio:"4/3",borderRadius:2,overflow:"hidden",flexShrink:0}}>
+                {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   src={(tab as any).image}
                   alt={tab.heading}
                   style={{width:"100%",height:"100%",objectFit:"cover",objectPosition:"center",display:"block"}}
                 />
-              ) : (
-                <div style={{width:"100%",height:"100%",display:"flex",alignItems:"center",justifyContent:"center"}}>
-                  <span style={{fontFamily:"var(--display)",fontWeight:800,fontSize:64,color:"rgba(0,0,0,0.06)"}}>{tab.label.split(" ").map((w:string)=>w[0]).join("")}</span>
-                </div>
-              )}
-            </div>
+              </div>
+            )}
             <div>
               <h2 style={{fontFamily:"var(--display)",fontWeight:800,fontSize:"clamp(32px,3.5vw,52px)",lineHeight:1.05,letterSpacing:"-0.025em",margin:"0 0 24px"}}>{tab.heading}</h2>
               {tab.body && <p style={{fontFamily:"var(--sans)",fontSize:17,lineHeight:1.7,color:"rgba(0,0,0,0.6)",margin:0}}>{tab.body}</p>}
