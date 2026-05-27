@@ -6,6 +6,7 @@ import Link from 'next/link'
 import Services from '@/components/Services'
 import HeroNotice from '@/components/HeroNotice'
 import BouncingLogo from '@/components/BouncingLogo'
+import HomepageCrewCard from '@/components/HomepageCrewCard'
 
 // Minimal portable-text renderer (bold, italic, links)
 function renderBlock(block: any) {
@@ -277,28 +278,16 @@ export default async function HomePage() {
           <div className="crew-track-wrap">
             <div className="crew-track" id="crew-track">
               {crew.map((m: any) => (
-                <div key={m._id} className="crew-card" style={{position:'relative'}}>
-                  <div className="crew-portrait" style={{position:'relative',overflow:'hidden'}}>
-                    {m.photo
-                      ? <img
-                          src={urlFor(m.photo).width(440).height(580).url()}
-                          alt={m.name}
-                          className="crew-photo-static"
-                        />
-                      : <div className="crew-portrait-placeholder"><span>{m.name.split(' ').map((n:string)=>n[0]).join('')}</span></div>
-                    }
-                    {m.hoverGifUrl && (
-                      <img
-                        src={m.hoverGifUrl}
-                        alt=""
-                        aria-hidden="true"
-                        className="crew-photo-gif"
-                      />
-                    )}
-                  </div>
-                  <h3 className="crew-name">{m.name}</h3>
-                  <p className="crew-role">{m.role}</p>
-                </div>
+                <HomepageCrewCard
+                  key={m._id}
+                  member={{
+                    _id:         m._id,
+                    name:        m.name,
+                    role:        m.role,
+                    photoUrl:    m.photo ? urlFor(m.photo).width(440).height(580).url() : null,
+                    hoverGifUrl: m.hoverGifUrl || null,
+                  }}
+                />
               ))}
             </div>
           </div>

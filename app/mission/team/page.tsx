@@ -1,5 +1,6 @@
 import { client, urlFor } from "@/lib/sanity"
 import { teamMembersQuery } from "@/lib/queries"
+import TeamCard from "@/components/TeamCard"
 
 async function getTeam() {
   try { return await client.fetch(teamMembersQuery) || [] } catch { return [] }
@@ -29,26 +30,17 @@ export default async function TeamPage() {
         <div style={{maxWidth:1280,margin:"0 auto",padding:"0 40px"}}>
           <div style={{display:"grid",gridTemplateColumns:"repeat(4,1fr)",gap:"48px 32px"}}>
             {team.map((m: any) => (
-              <div key={m._id} className="crew-card" style={{display:"flex",flexDirection:"column",gap:16}}>
-                <div style={{aspectRatio:"3/4",background:"#f0f0f0",borderRadius:2,overflow:"hidden",position:"relative"}}>
-                  {m.photo
-                    ? <img src={urlFor(m.photo).width(400).height(533).url()} alt={m.name}
-                        className="crew-photo-static" />
-                    : <div style={{width:"100%",height:"100%",background:"linear-gradient(135deg,#333,#000)",display:"flex",alignItems:"center",justifyContent:"center"}}>
-                        <span style={{fontFamily:"var(--display)",fontWeight:800,fontSize:32,color:"rgba(255,255,255,0.2)"}}>{m.name.split(" ").map((n:string)=>n[0]).join("")}</span>
-                      </div>
-                  }
-                  {m.hoverGifUrl && (
-                    <img src={m.hoverGifUrl} alt="" aria-hidden
-                      className="crew-photo-gif" />
-                  )}
-                </div>
-                <div>
-                  <h3 style={{fontFamily:"var(--display)",fontWeight:800,fontSize:18,letterSpacing:"-0.01em",margin:"0 0 4px"}}>{m.name}</h3>
-                  <p style={{fontFamily:"var(--sans)",fontSize:13,color:"rgba(0,0,0,0.45)",margin:0}}>{m.role}</p>
-                  {m.bio && <p style={{fontFamily:"var(--sans)",fontSize:13,lineHeight:1.55,color:"rgba(0,0,0,0.5)",margin:"8px 0 0"}}>{m.bio}</p>}
-                </div>
-              </div>
+              <TeamCard
+                key={m._id}
+                member={{
+                  _id:         m._id,
+                  name:        m.name,
+                  role:        m.role,
+                  bio:         m.bio,
+                  photoUrl:    m.photo ? urlFor(m.photo).width(400).height(533).url() : null,
+                  hoverGifUrl: m.hoverGifUrl || null,
+                }}
+              />
             ))}
           </div>
         </div>
