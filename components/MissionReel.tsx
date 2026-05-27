@@ -32,7 +32,7 @@ export default function MissionReel({ src, label = "The Reel" }: Props) {
   if (!src) return null
 
   return (
-    <section style={{ background: '#fff', padding: 0 }}>
+    <section style={{ background: '#fff', padding: '56px clamp(24px,6vw,96px)' }}>
       <div
         ref={sectionRef}
         onClick={() => !playing && setPlaying(true)}
@@ -43,7 +43,7 @@ export default function MissionReel({ src, label = "The Reel" }: Props) {
           background:  '#080808',
           overflow:    'hidden',
           cursor:       playing ? 'default' : 'pointer',
-          clipPath:     revealed ? 'inset(0% 0% 0% 0%)' : 'inset(5% 4% 5% 4%)',
+          clipPath:     revealed ? 'inset(0% 0% 0% 0%)' : 'inset(5% 3% 5% 3%)',
           transition:  'clip-path 1.2s cubic-bezier(0.16,1,0.3,1)',
         }}
       >
