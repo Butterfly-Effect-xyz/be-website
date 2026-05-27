@@ -1,8 +1,13 @@
 import Link from "next/link"
+import MissionReel from "@/components/MissionReel"
+
+// After uploading to Vimeo, replace VIMEO_ID with the number from the video URL
+// e.g. vimeo.com/123456789 → vimeoId="123456789"
+const VIMEO_ID = "VIMEO_ID"
 
 export default function MissionPage() {
   return (
-    <main>
+    <main data-hero-dark="1">
       <section style={{background:"#000",color:"#fff",minHeight:"70vh",display:"flex",alignItems:"flex-end",padding:"140px 0 80px",marginTop:-88,paddingTop:228}}>
         <div style={{maxWidth:1280,margin:"0 auto",padding:"0 40px",width:"100%"}}>
           <span style={{fontFamily:"var(--mono)",fontSize:11,fontWeight:500,letterSpacing:"0.28em",textTransform:"uppercase",color:"rgba(255,255,255,0.45)",display:"block",marginBottom:32}}>Mission</span>
@@ -10,6 +15,8 @@ export default function MissionPage() {
           <p style={{fontFamily:"var(--sans)",fontSize:"clamp(16px,1.4vw,20px)",lineHeight:1.55,color:"rgba(255,255,255,0.6)",margin:0,maxWidth:"48ch"}}>A culture-first agency built to close the distance between brands and the communities that matter most to them.</p>
         </div>
       </section>
+      <MissionReel vimeoId={VIMEO_ID} label="The Reel" />
+
       <section style={{padding:"80px 0"}}>
         <div style={{maxWidth:1280,margin:"0 auto",padding:"0 40px"}}>
           <div style={{display:"grid",gridTemplateColumns:"repeat(3,1fr)",gap:2}}>
