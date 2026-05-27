@@ -13,7 +13,7 @@ export default function MissionPage() {
           <p style={{fontFamily:"var(--sans)",fontSize:"clamp(16px,1.4vw,20px)",lineHeight:1.55,color:"rgba(255,255,255,0.6)",margin:0,maxWidth:"48ch"}}>A culture-first agency built to close the distance between brands and the communities that matter most to them.</p>
         </div>
       </section>
-      <MissionReel src={REEL_SRC} label="The Reel" />
+      <MissionReel src={REEL_SRC} label="On a mission" />
 
       <section style={{padding:"80px 0"}}>
         <div style={{maxWidth:1280,margin:"0 auto",padding:"0 40px"}}>
