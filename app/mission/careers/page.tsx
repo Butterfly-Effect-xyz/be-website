@@ -14,6 +14,7 @@ const TABS = [
     id: "who-we-are",
     label: "Who We Are",
     heading: "Who We Are",
+    image: "/images/careers-who-we-are.jpg",
     body: "At Butterfly Effect you will be working alongside ambitious, passionate people who care deeply about our craft and culture. You will move fast, take ownership of meaningful work, and help shape the direction of our business and our culture from the ground up. We are a high-energy collaborative team, committed to inclusivity and breakthrough thinking.",
   },
   {
