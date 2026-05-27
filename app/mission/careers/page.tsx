@@ -7,6 +7,7 @@ const TABS = [
     id: "what-we-do",
     label: "What We Do",
     heading: "What We Do",
+    image: "/images/careers-team.jpg",
     body: "We help brands connect with creators, communities and culture in a way that feels authentic and impactful. From strategy to activation, we engage in every step of the journey — because we believe that when people feel seen, change happens.",
   },
   {
@@ -69,8 +70,19 @@ export default function CareersPage() {
             ))}
           </div>
           <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:80,alignItems:"center"}}>
-            <div style={{aspectRatio:"4/3",background:"#f0f0f0",borderRadius:2,display:"flex",alignItems:"center",justifyContent:"center"}}>
-              <span style={{fontFamily:"var(--display)",fontWeight:800,fontSize:64,color:"rgba(0,0,0,0.06)"}}>{tab.label.split(" ").map((w:string)=>w[0]).join("")}</span>
+            <div style={{aspectRatio:"4/3",borderRadius:2,overflow:"hidden",background:"#f0f0f0",flexShrink:0}}>
+              {(tab as any).image ? (
+                // eslint-disable-next-line @next/next/no-img-element
+                <img
+                  src={(tab as any).image}
+                  alt={tab.heading}
+                  style={{width:"100%",height:"100%",objectFit:"cover",objectPosition:"center",display:"block"}}
+                />
+              ) : (
+                <div style={{width:"100%",height:"100%",display:"flex",alignItems:"center",justifyContent:"center"}}>
+                  <span style={{fontFamily:"var(--display)",fontWeight:800,fontSize:64,color:"rgba(0,0,0,0.06)"}}>{tab.label.split(" ").map((w:string)=>w[0]).join("")}</span>
+                </div>
+              )}
             </div>
             <div>
               <h2 style={{fontFamily:"var(--display)",fontWeight:800,fontSize:"clamp(32px,3.5vw,52px)",lineHeight:1.05,letterSpacing:"-0.025em",margin:"0 0 24px"}}>{tab.heading}</h2>
