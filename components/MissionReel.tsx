@@ -1,20 +1,20 @@
 "use client"
-import { useState, useEffect, useRef } from "react"
+import { useState, useEffect, useRef, useCallback } from "react"
 
 interface Props {
-  vimeoId: string   // paste your Vimeo video ID here after uploading
-  label?:  string
+  src:    string   // path to the video file, e.g. "/video/reel.mp4"
+  label?: string
 }
 
-export default function MissionReel({ vimeoId, label = "The Reel" }: Props) {
+export default function MissionReel({ src, label = "The Reel" }: Props) {
   const [playing,  setPlaying]  = useState(false)
   const [revealed, setRevealed] = useState(false)
   const [hovered,  setHovered]  = useState(false)
-  const ref = useRef<HTMLDivElement>(null)
+  const sectionRef = useRef<HTMLDivElement>(null)
 
-  // Trigger clip-path reveal once the section scrolls 20% into view
+  // Clip-path reveal when section scrolls 18% into viewport
   useEffect(() => {
-    const el = ref.current
+    const el = sectionRef.current
     if (!el) return
     const obs = new IntersectionObserver(
       ([entry]) => { if (entry.isIntersecting) setRevealed(true) },
@@ -24,29 +24,30 @@ export default function MissionReel({ vimeoId, label = "The Reel" }: Props) {
     return () => obs.disconnect()
   }, [])
 
-  // Nothing to show until there is a real Vimeo ID
-  if (!vimeoId || vimeoId === 'VIMEO_ID') return null
+  // Auto-play as soon as the <video> element mounts
+  const videoRef = useCallback((node: HTMLVideoElement | null) => {
+    if (node) node.play().catch(() => {})
+  }, [])
+
+  if (!src) return null
 
   return (
-    <section style={{ background: '#fff', padding: '0' }}>
+    <section style={{ background: '#fff', padding: 0 }}>
       <div
-        ref={ref}
+        ref={sectionRef}
         onClick={() => !playing && setPlaying(true)}
         style={{
-          position:   'relative',
-          width:      '100%',
-          aspectRatio:'16 / 9',
-          background: '#080808',
-          overflow:   'hidden',
-          cursor:     playing ? 'default' : 'pointer',
-          /* Clip-path reveal: inset → full open */
-          clipPath:   revealed
-            ? 'inset(0% 0% 0% 0%)'
-            : 'inset(5% 4% 5% 4%)',
-          transition: 'clip-path 1.2s cubic-bezier(0.16,1,0.3,1)',
+          position:    'relative',
+          width:       '100%',
+          aspectRatio: '16 / 9',
+          background:  '#080808',
+          overflow:    'hidden',
+          cursor:       playing ? 'default' : 'pointer',
+          clipPath:     revealed ? 'inset(0% 0% 0% 0%)' : 'inset(5% 4% 5% 4%)',
+          transition:  'clip-path 1.2s cubic-bezier(0.16,1,0.3,1)',
         }}
       >
-        {/* ── Grid texture ────────────────────────────────── */}
+        {/* Subtle grid texture */}
         <div style={{
           position:        'absolute',
           inset:            0,
@@ -56,107 +57,106 @@ export default function MissionReel({ vimeoId, label = "The Reel" }: Props) {
           zIndex:           1,
         }} />
 
-        {/* ── Vignette ────────────────────────────────────── */}
+        {/* Edge vignette */}
         <div style={{
-          position:   'absolute',
-          inset:       0,
-          background: 'radial-gradient(ellipse at center, transparent 30%, rgba(0,0,0,0.55) 100%)',
-          zIndex:      2,
-          pointerEvents:'none',
+          position:      'absolute',
+          inset:          0,
+          background:    'radial-gradient(ellipse at center, transparent 30%, rgba(0,0,0,0.55) 100%)',
+          pointerEvents: 'none',
+          zIndex:         2,
         }} />
 
-        {/* ── Poster / play state ─────────────────────────── */}
-        {!playing && (
-          <div style={{
-            position:       'absolute',
-            inset:           0,
-            display:        'flex',
-            flexDirection:  'column',
-            alignItems:     'center',
-            justifyContent: 'center',
-            gap:             28,
-            zIndex:          3,
-            /* Fade in as clip-path opens */
-            opacity:         revealed ? 1 : 0,
-            transform:       revealed ? 'none' : 'translateY(12px)',
-            transition:     'opacity 0.8s 0.3s ease, transform 0.8s 0.3s ease',
+        {/* Poster / play button — shown before play */}
+        <div style={{
+          position:       'absolute',
+          inset:           0,
+          display:        'flex',
+          flexDirection:  'column',
+          alignItems:     'center',
+          justifyContent: 'center',
+          gap:             24,
+          zIndex:          3,
+          opacity:         revealed && !playing ? 1 : 0,
+          transform:       revealed ? 'none' : 'translateY(12px)',
+          transition:     'opacity 0.5s ease, transform 0.8s 0.3s ease',
+          pointerEvents:   playing ? 'none' : 'auto',
+        }}>
+          <span style={{
+            fontFamily:    'var(--mono)',
+            fontSize:       11,
+            letterSpacing: '0.3em',
+            textTransform: 'uppercase',
+            color:         'rgba(255,255,255,0.35)',
           }}>
-            <span style={{
-              fontFamily:    'var(--mono)',
-              fontSize:       11,
-              letterSpacing: '0.3em',
-              textTransform: 'uppercase',
-              color:         'rgba(255,255,255,0.38)',
-            }}>
-              Butterfly Effect
-            </span>
+            Butterfly Effect
+          </span>
 
-            <h2 style={{
-              fontFamily:    'var(--display)',
-              fontWeight:     200,
-              fontSize:      'clamp(52px,9vw,140px)',
-              lineHeight:     0.9,
-              letterSpacing: '-0.04em',
-              color:         '#fff',
-              margin:         0,
-              textAlign:     'center',
-            }}>
-              {label}
-            </h2>
+          <h2 style={{
+            fontFamily:    'var(--display)',
+            fontWeight:     200,
+            fontSize:      'clamp(52px,9vw,140px)',
+            lineHeight:     0.9,
+            letterSpacing: '-0.04em',
+            color:         '#fff',
+            margin:         0,
+            textAlign:     'center',
+          }}>
+            {label}
+          </h2>
 
-            {/* Play button */}
-            <button
-              onMouseEnter={() => setHovered(true)}
-              onMouseLeave={() => setHovered(false)}
-              style={{
-                marginTop:      16,
-                width:           72,
-                height:          72,
-                borderRadius:   '50%',
-                border:         '1.5px solid rgba(255,255,255,0.5)',
-                background:      hovered ? 'rgba(255,255,255,0.1)' : 'transparent',
-                display:        'flex',
-                alignItems:     'center',
-                justifyContent: 'center',
-                cursor:         'pointer',
-                color:          '#fff',
-                transition:     'background 0.25s, border-color 0.25s, transform 0.25s',
-                transform:       hovered ? 'scale(1.08)' : 'scale(1)',
-              }}
-              aria-label="Play reel"
-            >
-              {/* Play triangle */}
-              <svg viewBox="0 0 24 24" fill="currentColor" style={{ width: 22, height: 22, marginLeft: 3 }}>
-                <path d="M8 5v14l11-7z" />
-              </svg>
-            </button>
+          <button
+            onMouseEnter={() => setHovered(true)}
+            onMouseLeave={() => setHovered(false)}
+            style={{
+              marginTop:      12,
+              width:           72,
+              height:          72,
+              borderRadius:   '50%',
+              border:         '1.5px solid rgba(255,255,255,0.5)',
+              background:      hovered ? 'rgba(255,255,255,0.1)' : 'transparent',
+              display:        'flex',
+              alignItems:     'center',
+              justifyContent: 'center',
+              cursor:         'pointer',
+              color:          '#fff',
+              transition:     'background 0.25s, transform 0.25s',
+              transform:       hovered ? 'scale(1.08)' : 'scale(1)',
+            }}
+            aria-label="Play reel"
+          >
+            <svg viewBox="0 0 24 24" fill="currentColor" style={{ width: 22, height: 22, marginLeft: 3 }}>
+              <path d="M8 5v14l11-7z" />
+            </svg>
+          </button>
 
-            <span style={{
-              fontFamily:    'var(--mono)',
-              fontSize:       10,
-              letterSpacing: '0.22em',
-              textTransform: 'uppercase',
-              color:         'rgba(255,255,255,0.25)',
-              marginTop:     -8,
-            }}>
-              Press play
-            </span>
-          </div>
-        )}
+          <span style={{
+            fontFamily:    'var(--mono)',
+            fontSize:       10,
+            letterSpacing: '0.22em',
+            textTransform: 'uppercase',
+            color:         'rgba(255,255,255,0.22)',
+            marginTop:     -8,
+          }}>
+            Press play
+          </span>
+        </div>
 
-        {/* ── Vimeo iframe (lazy — only mounts on click) ──── */}
+        {/* Video — only mounts after play is pressed */}
         {playing && (
-          <iframe
-            src={`https://player.vimeo.com/video/${vimeoId}?autoplay=1&byline=0&title=0&portrait=0&color=ffffff`}
-            allow="autoplay; fullscreen; picture-in-picture"
-            allowFullScreen
+          <video
+            ref={videoRef}
+            src={src}
+            controls
+            playsInline
+            preload="none"
             style={{
               position: 'absolute',
               inset:     0,
               width:    '100%',
               height:   '100%',
-              border:   'none',
+              objectFit:'cover',
               zIndex:    5,
+              background:'#000',
             }}
           />
         )}
